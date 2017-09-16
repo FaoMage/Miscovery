@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="50dp">
 
     <LinearLayout
         android:id="@+id/linearLayoutSongTitles"
@@ -19,6 +19,7 @@
             android:textSize="20sp" />-->
 
         <TextView
+            android:id="@+id/textView_SongName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Text song"
@@ -30,7 +31,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_favorite_border_black_24dp"
-        android:padding="7dp"
+        android:padding="15dp"
         android:layout_toLeftOf="@id/linearLayoutSongTitles"
         android:layout_centerVertical="true"/>
 
@@ -39,7 +40,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_more_vert_black_24dp"
-        android:padding="7dp"
+        android:padding="15dp"
         android:layout_toRightOf="@id/linearLayoutSongTitles"
         android:layout_centerVertical="true"/>
 
