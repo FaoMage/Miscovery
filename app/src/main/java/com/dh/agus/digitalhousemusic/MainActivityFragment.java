@@ -51,6 +51,8 @@ public class MainActivityFragment extends Fragment {
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
+        //item decoration?
+
         return view;
     }
 

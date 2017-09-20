@@ -19,29 +19,35 @@
             android:textSize="20sp" />-->
 
         <TextView
+            style="@style/ItemStructureStyle"
             android:id="@+id/textView_SongName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Text song"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:gravity="center_vertical"/>
     </LinearLayout>
 
     <ImageView
+        style="@style/ItemStructureStyle"
         android:id="@+id/imageViewFavorite"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_favorite_border_black_24dp"
         android:padding="15dp"
         android:layout_toLeftOf="@id/linearLayoutSongTitles"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"/>
 
     <ImageView
+        style="@style/ItemStructureStyle"
         android:id="@+id/imageViewMenu"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_more_vert_black_24dp"
         android:padding="15dp"
         android:layout_toRightOf="@id/linearLayoutSongTitles"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
