@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -27,5 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:design:26.+'
+    compile 'at.favre.lib:dali:0.3.4'
     testCompile 'junit:junit:4.12'
 }

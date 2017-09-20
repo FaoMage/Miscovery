@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#50000000"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/topBarPannel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/textViewAlbumName"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:text="Text Album"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:id="@+id/imageViewBack"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_chevron_left_black_24dp"
+            android:padding="5dp"
+            android:layout_toLeftOf="@id/textViewAlbumName"
+            android:theme="@style/WhiteVector"/>
+
+
+        <ImageView
+            android:id="@+id/imageViewAdd"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_black_24dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@id/textViewAlbumName"
+            android:theme="@style/WhiteVector"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/imageViewAlbumImage"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/textViewSongName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:theme="@style/SongName"
+                android:text="Parachute"
+                />
+
+            <TextView
+                android:id="@+id/textViewSongAlbumName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textViewSongName"
+                android:theme="@style/SongName"
+                android:text="Myloxyloto"/>
+
+            <ProgressBar
+                android:id="@+id/textViewProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textViewSongAlbumName" />
+
+            <TextView
+                android:id="@+id/textViewProgressBarStarts"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textViewProgressBar"
+                android:layout_marginTop="10dp"
+                android:layout_alignLeft="@+id/textViewProgressBar"
+                android:theme="@style/SongTimeReference"
+                android:text="0:46"/>
+
+            <TextView
+                android:id="@+id/textViewProgressBarEnds"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textViewProgressBar"
+                android:layout_alignRight="@+id/textViewProgressBar"
+                android:theme="@style/SongTimeReference"
+                android:text="3:34"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageViewPause"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_pause_black_24dp"
+                android:theme="@style/WhiteVector"
+                />
+
+            <ImageView
+                android:id="@+id/imageViewPrevious"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_toLeftOf="@id/imageViewPause"
+                android:layout_toStartOf="@id/imageViewPause"
+                android:src="@drawable/ic_skip_previous_black_24dp"
+                android:theme="@style/WhiteVector"
+                />
+
+            <ImageView
+                android:id="@+id/imageViewNext"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_toRightOf="@id/imageViewPause"
+                android:layout_toEndOf="@id/imageViewPause"
+                android:src="@drawable/ic_skip_next_black_24dp"
+                android:theme="@style/WhiteVector"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+</FrameLayout>
