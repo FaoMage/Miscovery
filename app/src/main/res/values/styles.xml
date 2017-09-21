@@ -8,13 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NavigationStyle">
+    <style name="TopBarStyle">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:tint">@color/colorDarkGreen</item>
-        <item name="android:background">@color/colorDark225</item>
+        <item name="android:tint">@color/colorAccent</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ItemStructureStyle" parent="NavigationStyle">
-        <item name="android:background">@color/colorDark180</item>
-    </style>
 </resources>

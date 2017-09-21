@@ -13,18 +13,16 @@
         android:layout_height="50dp">
 
         <TextView
-            style="@style/NavigationStyle"
+            style="@style/TopBarStyle"
             android:id="@+id/textViewAlbumName"
             android:layout_width="260dp"
             android:layout_height="match_parent"
             android:text="Text Album"
-            android:textSize="25sp"
-            android:textStyle="bold"
             android:gravity="center"
             android:layout_centerHorizontal="true"/>
 
         <ImageView
-            style="@style/NavigationStyle"
+            style="@style/TopBarStyle"
             android:id="@+id/imageViewBack"
             android:layout_width="50dp"
             android:layout_height="match_parent"
@@ -34,7 +32,7 @@
             android:layout_alignParentLeft="true" />
 
         <ImageView
-            style="@style/NavigationStyle"
+            style="@style/TopBarStyle"
             android:id="@+id/imageViewAdd"
             android:layout_width="50dp"
             android:layout_height="match_parent"
@@ -47,6 +45,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_MainActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
     
 </LinearLayout>

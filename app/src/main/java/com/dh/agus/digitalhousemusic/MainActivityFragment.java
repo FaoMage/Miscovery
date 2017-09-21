@@ -3,11 +3,14 @@ package com.dh.agus.digitalhousemusic;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,9 +29,21 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
+        // ClickListener del boton <.
+        ImageView backButton = view.findViewById(R.id.imageViewBack);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Funcion: Volver a lista de albumes", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Agrega canciones para el test.
         loadSongs();
 
+        // Creacion del RecyclerView.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
+        // ClickListeners de cada view del RecyclerView.
         RecyclerViewAdapter.RecyclerViewInterface listener = new RecyclerViewAdapter.RecyclerViewInterface() {
             @Override
             public void favoriteOnClick() {
@@ -51,7 +66,9 @@ public class MainActivityFragment extends Fragment {
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        //item decoration?
+        //ItemDecoration: Agrega una linea separadora
+        DividerItemDecoration divider = new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(divider);
 
         return view;
     }
