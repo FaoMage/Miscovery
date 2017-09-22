@@ -1,10 +1,11 @@
-package com.dh.agus.digitalhousemusic;
+package com.dh.agus.digitalhousemusic.View;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.dh.agus.digitalhousemusic.R;
 
 public class MainActivity extends AppCompatActivity {
 

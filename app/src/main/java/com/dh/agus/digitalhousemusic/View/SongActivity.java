@@ -1,10 +1,12 @@
-package com.dh.agus.digitalhousemusic;
+package com.dh.agus.digitalhousemusic.View;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+
+import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.Model.POJO.Song;
 
 import at.favre.lib.dali.Dali;
 

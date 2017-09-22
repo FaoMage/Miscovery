@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic;
+package com.dh.agus.digitalhousemusic.Model.POJO;
 
 public class Song {
     private Integer id;
