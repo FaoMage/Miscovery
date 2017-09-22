@@ -13,10 +13,10 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> songsList;
+    private List<Song> songsList;
     private RecyclerViewInterface listener;
 
-    public RecyclerViewAdapter (Context context, List<String> songsList, RecyclerViewInterface listener) {
+    public RecyclerViewAdapter (Context context, List<Song> songsList, RecyclerViewInterface listener) {
         this.context = context;
         this.songsList = songsList;
         this.listener = listener;
@@ -33,8 +33,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String songName = songsList.get(position);
-        holder.loadView(songName);
+        Song song = songsList.get(position);
+        holder.loadView(song.getName(), song.getArtist());
 
         // onclicks codeados de forma rara para mostrar que van a hacer
         holder.itemView.findViewById(R.id.imageViewFavorite).setOnClickListener(new View.OnClickListener() {
@@ -65,14 +65,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewNameSong;
+        private TextView textViewArtistName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewNameSong = itemView.findViewById(R.id.textView_SongName);
+            this.textViewArtistName = itemView.findViewById(R.id.textView_ArtistName);
         }
 
-        public void loadView (String songName) {
+        public void loadView (String songName, String artistName) {
             textViewNameSong.setText(songName);
+            textViewArtistName.setText(artistName);
         }
     }
 

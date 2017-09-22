@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MainActivityFragment extends Fragment {
 
-    private List<String> songsList = new ArrayList<>();
+    private List<Song> songsList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +60,8 @@ public class MainActivityFragment extends Fragment {
                 Toast.makeText(getContext(), "Funcion: Ir a la reproduccion", Toast.LENGTH_SHORT).show();
             }
         };
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),songsList,listener);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
+                songsList, listener);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setAdapter(recyclerViewAdapter);
@@ -75,26 +76,21 @@ public class MainActivityFragment extends Fragment {
 
     // Metodo que carga una base de datos para probar la lista
     private void loadSongs () {
-        songsList.add("Musica1");
-        songsList.add("Musica2");
-        songsList.add("Musica3");
-        songsList.add("Musica4");
-        songsList.add("Musica5");
-        songsList.add("Musica6");
-        songsList.add("Musica7");
-        songsList.add("Musica8");
-        songsList.add("Musica9");
-        songsList.add("Musica10");
-        songsList.add("Musica11");
-        songsList.add("Musica12");
-        songsList.add("Musica13");
-        songsList.add("Musica14");
-        songsList.add("Musica15");
-        songsList.add("Musica16");
-        songsList.add("Musica17");
-        songsList.add("Musica18");
-        songsList.add("Musica19");
-        songsList.add("Musica20");
+        songsList.add(new Song(1, "Stairway to Heaven", "Led Zeppelin", R.drawable.coldplay, "Led Zeppelin", ""));
+        songsList.add(new Song(2, "Come as you are", "Nirvana", R.drawable.coldplay, "Nirvana", ""));
+        songsList.add(new Song(3, "Friday I'm in Love", "The Cure", R.drawable.coldplay, "The Cure", ""));
+        songsList.add(new Song(4, "Black", "Pearl Jam", R.drawable.coldplay, "Pearl Jam", ""));
+        songsList.add(new Song(5, "Plush", "Stone Temple Pilots", R.drawable.coldplay, "Stone Temple Pilots", ""));
+        songsList.add(new Song(6, "September", "Earth, Wind & Fire", R.drawable.coldplay, "Earth, Wind & Fire", ""));
+        songsList.add(new Song(7, "Sultans of Swing", "Dire Straits", R.drawable.coldplay, "Dire Straits", ""));
+        songsList.add(new Song(8, "Layla", "Eric Clapton", R.drawable.coldplay, "Eric Clapton", ""));
+        songsList.add(new Song(9, "Could you be loved", "Bob Marley", R.drawable.coldplay, "Bob Marley", ""));
+        songsList.add(new Song(10, "Another one bites the dust", "Queen", R.drawable.coldplay, "Queen", ""));
+        songsList.add(new Song(11, "Hotel California", "Eagles", R.drawable.coldplay, "Eagles", ""));
+        songsList.add(new Song(12, "Losing my religion", "R.E.M", R.drawable.coldplay, "R.E.M", ""));
+        songsList.add(new Song(12, "Bad Moon Rising", "Creedence", R.drawable.coldplay, "Creedence", ""));
+        songsList.add(new Song(12, "Message in a bottle", "The Police", R.drawable.coldplay, "The Police", ""));
+        songsList.add(new Song(12, "Love her madly", "The Doors", R.drawable.coldplay, "The Doors", ""));
     }
 
 }
