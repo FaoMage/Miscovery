@@ -13,13 +13,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Carga el fragment.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MainActivityFragment mainActivityFragment = new MainActivityFragment();
         fragmentTransaction.add(R.id.frame_MainActivity,mainActivityFragment);
         fragmentTransaction.commit();
-
-        Intent intent = new Intent(MainActivity.this, SongActivity.class);
-        startActivity(intent);
     }
 }
