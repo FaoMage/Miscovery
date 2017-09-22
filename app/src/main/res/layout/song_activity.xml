@@ -24,7 +24,7 @@
             android:id="@+id/textViewAlbumName"
             android:layout_width="260dp"
             android:layout_height="match_parent"
-            android:text="Text Album"
+            android:text="Nombre Album"
             android:textSize="25sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -49,6 +49,8 @@
             android:padding="5dp"
             android:layout_toRightOf="@id/textViewAlbumName"
             android:theme="@style/WhiteVector"
+
+            android:visibility="gone"
             />
 
     </RelativeLayout>

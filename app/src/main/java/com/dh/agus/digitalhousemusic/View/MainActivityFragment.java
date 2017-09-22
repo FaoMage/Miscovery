@@ -1,6 +1,7 @@
 package com.dh.agus.digitalhousemusic.View;
 
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -17,6 +18,8 @@ import com.dh.agus.digitalhousemusic.Model.POJO.Song;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import at.favre.lib.dali.Dali;
 
 
 /**
@@ -72,6 +75,10 @@ public class MainActivityFragment extends Fragment {
         //ItemDecoration: Agrega una linea separadora
         DividerItemDecoration divider = new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(divider);
+
+        //Test songslist background
+        ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
+        Dali.create(getContext()).load(R.drawable.coldplay).blurRadius(25).into(imageViewSongListBackground);
 
         return view;
     }

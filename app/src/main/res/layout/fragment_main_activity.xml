@@ -10,14 +10,15 @@
     <RelativeLayout
         android:id="@+id/topBarPannel"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
 
         <TextView
             style="@style/TopBarStyle"
             android:id="@+id/textViewAlbumName"
             android:layout_width="260dp"
             android:layout_height="match_parent"
-            android:text="Text Album"
+            android:text="Nombre Album"
             android:gravity="center"
             android:layout_centerHorizontal="true"/>
 
@@ -39,12 +40,26 @@
             android:src="@drawable/ic_add_black_24dp"
             android:padding="5dp"
             android:layout_toRightOf="@id/textViewAlbumName"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+
+            android:visibility="gone"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_MainActivity"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageViewSongListBackground"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_MainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
     
 </LinearLayout>
