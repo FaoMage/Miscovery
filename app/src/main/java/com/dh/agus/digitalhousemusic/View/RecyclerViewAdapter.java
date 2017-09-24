@@ -35,10 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Song song = songsList.get(position);
+        final Song song = songsList.get(position);
         holder.loadView(song.getName(), song.getArtist());
 
-        // onclicks codeados de forma rara para mostrar que van a hacer
         holder.itemView.findViewById(R.id.imageViewFavorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.textViewNameSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.songOnClick();
+                listener.songOnClick(song.getId());
             }
         });
     }
@@ -84,6 +83,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface RecyclerViewInterface {
         void favoriteOnClick ();
         void menuOnClick ();
-        void songOnClick();
+        void songOnClick(Integer songId);
     }
 }

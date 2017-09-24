@@ -70,6 +70,7 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_centerInParent="true"
+                android:elevation="6dp"
                 />
 
         </RelativeLayout>
@@ -87,7 +88,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:theme="@style/SongName"
-                android:text="Parachute"
                 />
 
             <TextView
@@ -96,8 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/textViewSongName"
-                android:theme="@style/SongName"
-                android:text="Myloxyloto"/>
+                android:theme="@style/SongName" />
 
             <ProgressBar
                 android:id="@+id/textViewProgressBar"

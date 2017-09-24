@@ -49,24 +49,11 @@ public class MainActivityFragment extends Fragment {
         // Creacion del RecyclerView.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
         // ClickListeners de cada view del RecyclerView.
-        RecyclerViewAdapter.RecyclerViewInterface listener = new RecyclerViewAdapter.RecyclerViewInterface() {
-            @Override
-            public void favoriteOnClick() {
-                Toast.makeText(getContext(), "Funcion: Agregar a favoritos", Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void menuOnClick() {
-                Toast.makeText(getContext(), "Funcion: Abrir menu de cancion", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void songOnClick() {
-                Toast.makeText(getContext(), "Funcion: Ir a la reproduccion", Toast.LENGTH_SHORT).show();
-            }
-        };
+        // RecyclerViewAdapter | getActivity pasa la información directamente a la actividad
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
-                songsList, listener);
+                    songsList, (RecyclerViewAdapter.RecyclerViewInterface) getActivity());
+
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setAdapter(recyclerViewAdapter);
