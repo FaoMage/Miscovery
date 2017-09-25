@@ -38,7 +38,7 @@ public class SongActivity extends AppCompatActivity  implements Callback<Track> 
 
             serviceDeezer service = retrofit.create(serviceDeezer.class);
 
-            Call<Track> response = service.getTrack(songID.toString());
+            Call<Track> response = service.getTrack("3135556");
 
             response.enqueue(this);
         }
@@ -61,13 +61,12 @@ public class SongActivity extends AppCompatActivity  implements Callback<Track> 
             Album album = track.getAlbum();
             textViewAlbumName.setText(album.getTitle());
 
-            ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
-            Picasso.with(this).load(album.getCoverXl()).into(backgroundImageView);
-            Dali.create(this).load(R.drawable.coldplay).blurRadius(25).into(backgroundImageView);
 
             ImageView imageAlbum = (ImageView) findViewById(R.id.imageViewAlbumImage);
             Picasso.with(this).load(album.getCoverMedium()).into(imageAlbum);
 
+            ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
+            Dali.create(this).load(imageAlbum).blurRadius(25).into(backgroundImageView);
         } else {
             System.out.println("Error");
         }
