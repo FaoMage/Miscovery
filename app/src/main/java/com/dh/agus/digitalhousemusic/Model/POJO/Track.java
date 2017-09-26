@@ -1,10 +1,14 @@
 package com.dh.agus.digitalhousemusic.Model.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Track {
+public class Track implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -72,6 +76,35 @@ public class Track {
     @SerializedName("type")
     @Expose
     private String type;
+
+    protected Track(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        titleShort = in.readString();
+        titleVersion = in.readString();
+        isrc = in.readString();
+        link = in.readString();
+        share = in.readString();
+        duration = in.readString();
+        rank = in.readString();
+        releaseDate = in.readString();
+        preview = in.readString();
+        availableCountries = in.createStringArrayList();
+        album = in.readParcelable(Album.class.getClassLoader());
+        type = in.readString();
+    }
+
+    public static final Creator<Track> CREATOR = new Creator<Track>() {
+        @Override
+        public Track createFromParcel(Parcel in) {
+            return new Track(in);
+        }
+
+        @Override
+        public Track[] newArray(int size) {
+            return new Track[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -249,4 +282,26 @@ public class Track {
         this.type = type;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(titleShort);
+        parcel.writeString(titleVersion);
+        parcel.writeString(isrc);
+        parcel.writeString(link);
+        parcel.writeString(share);
+        parcel.writeString(duration);
+        parcel.writeString(rank);
+        parcel.writeString(releaseDate);
+        parcel.writeString(preview);
+        parcel.writeStringList(availableCountries);
+        parcel.writeParcelable(album, i);
+        parcel.writeString(type);
+    }
 }

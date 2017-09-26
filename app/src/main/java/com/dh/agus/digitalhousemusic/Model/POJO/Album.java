@@ -1,9 +1,14 @@
 package com.dh.agus.digitalhousemusic.Model.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Album {
+import java.util.ArrayList;
+
+public class Album implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -35,9 +40,39 @@ public class Album {
     @SerializedName("tracklist")
     @Expose
     private String tracklist;
+    @SerializedName("tracks")
+    @Expose
+    private DataTracksList tracks;
     @SerializedName("type")
     @Expose
     private String type;
+
+    protected Album(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        link = in.readString();
+        cover = in.readString();
+        coverSmall = in.readString();
+        coverMedium = in.readString();
+        coverBig = in.readString();
+        coverXl = in.readString();
+        releaseDate = in.readString();
+        tracklist = in.readString();
+        tracks = in.readParcelable(DataTracksList.class.getClassLoader());
+        type = in.readString();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -119,6 +154,14 @@ public class Album {
         this.tracklist = tracklist;
     }
 
+    public DataTracksList getTracks() {
+        return tracks;
+    }
+
+    public void setDataTracksList(DataTracksList tracklist) {
+        this.tracks = tracklist;
+    }
+
     public String getType() {
         return type;
     }
@@ -127,4 +170,24 @@ public class Album {
         this.type = type;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(link);
+        parcel.writeString(cover);
+        parcel.writeString(coverSmall);
+        parcel.writeString(coverMedium);
+        parcel.writeString(coverBig);
+        parcel.writeString(coverXl);
+        parcel.writeString(releaseDate);
+        parcel.writeString(tracklist);
+        parcel.writeParcelable(tracks, i);
+        parcel.writeString(type);
+    }
 }

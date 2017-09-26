@@ -7,18 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
-import com.dh.agus.digitalhousemusic.Model.POJO.Song;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private Context context;
-    private List<Song> songsList;
+    private List<Track> songsList;
     private RecyclerViewInterface listener;
 
-    public RecyclerViewAdapter (Context context, List<Song> songsList, RecyclerViewInterface listener) {
+    public RecyclerViewAdapter (Context context, List<Track> songsList, RecyclerViewInterface listener) {
         this.context = context;
         this.songsList = songsList;
         this.listener = listener;
@@ -35,8 +35,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final Song song = songsList.get(position);
-        holder.loadView(song.getName(), song.getArtist());
+        final Track track = songsList.get(position);
+        holder.loadView(track.getTitle(), track.getArtist().getName());
 
         holder.itemView.findViewById(R.id.imageViewFavorite).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.textViewNameSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.songOnClick(song.getId());
+                listener.songOnClick(track.getId());
             }
         });
     }
@@ -83,6 +83,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface RecyclerViewInterface {
         void favoriteOnClick ();
         void menuOnClick ();
-        void songOnClick(Integer songId);
+        void songOnClick(String songId);
     }
 }

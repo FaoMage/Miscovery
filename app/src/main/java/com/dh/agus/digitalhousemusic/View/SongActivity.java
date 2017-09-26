@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
-import com.dh.agus.digitalhousemusic.Model.POJO.Song;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
@@ -22,7 +21,7 @@ import retrofit2.Response;
 import static com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer.retrofit;
 
 
-public class SongActivity extends AppCompatActivity  implements Callback<Track> {
+public class SongActivity extends AppCompatActivity implements Callback<Track> {
     static final String SONG_ID = "song_id";
 
     @Override
@@ -34,11 +33,11 @@ public class SongActivity extends AppCompatActivity  implements Callback<Track> 
 
         if (bundle != null) {
             // Data
-            Integer songID = bundle.getInt(SONG_ID);
+            String songID = bundle.getString(SONG_ID);
 
             serviceDeezer service = retrofit.create(serviceDeezer.class);
 
-            Call<Track> response = service.getTrack("3135556");
+            Call<Track> response = service.getTrack(songID);
 
             response.enqueue(this);
         }
