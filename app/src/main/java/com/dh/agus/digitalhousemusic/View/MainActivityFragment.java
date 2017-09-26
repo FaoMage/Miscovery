@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.R;
@@ -66,6 +67,10 @@ public class MainActivityFragment extends Fragment {
         //Test songslist background
         ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
         Dali.create(getContext()).load(R.drawable.coldplay).blurRadius(25).into(imageViewSongListBackground);
+
+        //cambio nombre topbar
+        TextView textViewTopBarSongName = view.findViewById(R.id.textViewAlbumName);
+        textViewTopBarSongName.setText("Discovery");
 
         return view;
     }
