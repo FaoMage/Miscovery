@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
@@ -50,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 listener.menuOnClick();
             }
         });
-        holder.textViewNameSong.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.songOnClick(track.getId());
@@ -67,11 +68,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         private TextView textViewNameSong;
         private TextView textViewArtistName;
+        private LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewNameSong = itemView.findViewById(R.id.textView_SongName);
             this.textViewArtistName = itemView.findViewById(R.id.textView_ArtistName);
+            this.linearLayout = itemView.findViewById(R.id.linearLayoutSongTitles);
         }
 
         public void loadView (String songName, String artistName) {
