@@ -7,5 +7,6 @@
     <color name="colorDark180">#b4000000</color>
     <color name="colorDark225">#e1000000</color>
     <color name="colorLightGrey">#a0a0a0</color>
+    <color name="colorDarkGrey">#363535</color>
     <color name="colorRed">#a00808</color>
 </resources>

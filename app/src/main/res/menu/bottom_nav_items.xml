@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        />
+    <item
+        android:id="@+id/menu_favorites"
+        android:title="@string/favorites"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        />
+</menu>
