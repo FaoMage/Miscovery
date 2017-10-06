@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/frame_MainActivity"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_mainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity">
+    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_launcher"
+        android:background="@color/colorPrimary"
+        android:padding="100dp"/>
+
+    <FrameLayout
+        android:id="@+id/frame_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView_mainActivity"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_main_activity"
+        app:menu="@menu/menu_main_activity"/>
+
+</android.support.v4.widget.DrawerLayout>
