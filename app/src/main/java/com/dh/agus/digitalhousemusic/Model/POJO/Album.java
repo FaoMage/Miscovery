@@ -62,6 +62,9 @@ public class Album implements Parcelable {
         type = in.readString();
     }
 
+    // Constructor agregado para crear Favoritos
+    public Album () {}
+
     public static final Creator<Album> CREATOR = new Creator<Album>() {
         @Override
         public Album createFromParcel(Parcel in) {
