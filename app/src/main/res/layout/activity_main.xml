@@ -39,5 +39,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_main_activity"
-        app:menu="@menu/menu_main_activity"/>
+        app:menu="@menu/menu_main_activity"
+
+        android:background="@color/colorPrimary"
+        app:itemTextColor="@color/colorWhite"/>
 </android.support.v4.widget.DrawerLayout>

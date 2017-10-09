@@ -42,6 +42,10 @@ public class Artist {
     @Expose
     private String type;
 
+    public Artist(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

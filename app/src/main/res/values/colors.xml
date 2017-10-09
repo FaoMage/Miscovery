@@ -9,4 +9,5 @@
     <color name="colorLightGrey">#a0a0a0</color>
     <color name="colorDarkGrey">#363535</color>
     <color name="colorRed">#a00808</color>
+    <color name="colorTest">#78000000</color>
 </resources>

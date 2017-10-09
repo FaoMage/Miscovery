@@ -14,9 +14,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
+import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
+import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,23 +47,58 @@ public class MainActivity extends AppCompatActivity
         response.enqueue(this);
 
         // Busco el DrawerLayout y NavigationView
-        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_mainActivity);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView_mainActivity);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_mainActivity);
+        NavigationView navigationView = findViewById(R.id.navigationView_mainActivity);
         // Le seteo el onSelectedListener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_menuMainActivity_favoritos:
-                        //todo aca no se que hacer con favoritos...
-                        Call<Album> responseFav = service.getAlbum("5979050");
-                        responseFav.enqueue(MainActivity.this);
+                        //Call<Album> responseFav = service.getAlbum("5979050");
+                        SongListFragment songListFragment =
+                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
+                        changeFragment(songListFragment,NOT_HOME);
                         break;
                 }
                 drawerLayout.closeDrawers();
                 return false;
             }
         });
+    }
+
+    private Favoritos loadHardcodeFavoritos () {
+        Artist artist = new Artist("Fulano de tal");
+        DataTracksList dataTracksList = new DataTracksList();
+        Track track1 = new Track("Una Cancion de Favoritos",artist);
+        Track track2 = new Track("Una Cancion de Favoritos",artist);
+        Track track3 = new Track("Una Cancion de Favoritos",artist);
+        Track track4 = new Track("Una Cancion de Favoritos",artist);
+        Track track5 = new Track("Una Cancion de Favoritos",artist);
+        Track track6 = new Track("Una Cancion de Favoritos",artist);
+        Track track7 = new Track("Una Cancion de Favoritos",artist);
+        Track track8 = new Track("Una Cancion de Favoritos",artist);
+        Track track9 = new Track("Una Cancion de Favoritos",artist);
+        Track track10 = new Track("Una Cancion de Favoritos",artist);
+        Track track11 = new Track("Una Cancion de Favoritos",artist);
+        Track track12 = new Track("Una Cancion de Favoritos",artist);
+        ArrayList<Track> trackList = new ArrayList<>();
+        trackList.add(track1);
+        trackList.add(track2);
+        trackList.add(track3);
+        trackList.add(track4);
+        trackList.add(track5);
+        trackList.add(track6);
+        trackList.add(track7);
+        trackList.add(track8);
+        trackList.add(track9);
+        trackList.add(track10);
+        trackList.add(track11);
+        trackList.add(track12);
+        dataTracksList.setData(trackList);
+        Favoritos favoritos = new Favoritos();
+        favoritos.setDataTracksList(dataTracksList);
+        return favoritos;
     }
 
     @Override

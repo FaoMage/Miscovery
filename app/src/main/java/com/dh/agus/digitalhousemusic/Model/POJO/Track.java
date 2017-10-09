@@ -94,6 +94,11 @@ public class Track implements Parcelable {
         type = in.readString();
     }
 
+    public Track(String title, Artist artist) {
+        this.title = title;
+        this.artist = artist;
+    }
+
     public static final Creator<Track> CREATOR = new Creator<Track>() {
         @Override
         public Track createFromParcel(Parcel in) {

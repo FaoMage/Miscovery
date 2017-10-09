@@ -17,6 +17,8 @@ public class DataTracksList implements Parcelable {
         data = in.createTypedArrayList(Track.CREATOR);
     }
 
+    public DataTracksList() {    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(data);
