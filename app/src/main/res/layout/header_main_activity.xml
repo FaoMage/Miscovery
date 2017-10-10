@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="-3dp"
-            android:text="@string/menu"
+            android:text="@string/header_tittle_menu"
             android:textColor="@color/colorAccent"
             android:textSize="50sp"
             android:textStyle="bold" />

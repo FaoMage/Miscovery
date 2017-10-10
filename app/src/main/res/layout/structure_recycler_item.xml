@@ -17,7 +17,7 @@
             android:id="@+id/textView_SongName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Text song"
+            android:text="@string/test"
             android:textSize="18sp"
             android:gravity="center_vertical"
 
@@ -27,7 +27,7 @@
             android:id="@+id/textView_ArtistName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Artist name"
+            android:text="@string/test"
             android:textSize="13sp"
             android:gravity="center_vertical"
             android:layout_marginTop="-5dp"

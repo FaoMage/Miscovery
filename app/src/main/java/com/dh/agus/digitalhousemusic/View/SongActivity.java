@@ -81,7 +81,7 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
             imageViewBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(SongActivity.this, "Funcion: Volver al album", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
         } else {

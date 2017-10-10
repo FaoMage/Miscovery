@@ -23,49 +23,10 @@
             android:id="@+id/textViewTopBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="test test"
+            android:text="@string/test"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             />
 
     </LinearLayout>
-
-    <!--<RelativeLayout
-        android:id="@+id/topBarPannel"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
-
-        <TextView
-            style="@style/TopBarStyle"
-            android:id="@+id/textViewAlbumName"
-            android:layout_width="260dp"
-            android:layout_height="match_parent"
-            android:text="Nombre Album"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            />
-
-        <ImageView
-            style="@style/TopBarStyle"
-            android:id="@+id/imageViewBack"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_chevron_left_black_24dp"
-            android:padding="5dp"
-            android:layout_toLeftOf="@id/textViewAlbumName"
-            android:layout_alignParentLeft="true" />
-
-        <ImageView
-            style="@style/TopBarStyle"
-            android:id="@+id/imageViewAdd"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_add_black_24dp"
-            android:padding="5dp"
-            android:layout_toRightOf="@id/textViewAlbumName"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>-->
-
 </LinearLayout>

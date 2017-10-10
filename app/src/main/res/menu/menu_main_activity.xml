@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/item_menuMainActivity_favoritos"
-        android:title="@string/favoritos"
+        android:title="@string/menu_favoritos"
         />
 
     <item
         android:id="@+id/item_menuMainActivity_login"
-        android:title="@string/login"
+        android:title="@string/menu_login"
         android:visible="true"
         />
 
     <item
         android:id="@+id/item_menuMainActivity_logout"
-        android:title="@string/logout"
+        android:title="@string/menu_logout"
         android:visible="false"
         />
 

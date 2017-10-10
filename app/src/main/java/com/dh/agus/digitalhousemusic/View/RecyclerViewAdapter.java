@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,13 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         final Track track = songsList.get(position);
         holder.loadView(track.getTitle(), track.getArtist().getName());
 
-        holder.itemView.findViewById(R.id.imageViewFavorite).setOnClickListener(new View.OnClickListener() {
+        holder.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.favoriteOnClick(view);
             }
         });
-        holder.itemView.findViewById(R.id.imageViewMenu).setOnClickListener(new View.OnClickListener() {
+        holder.imageViewMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 listener.menuOnClick(view);
@@ -69,12 +70,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView textViewNameSong;
         private TextView textViewArtistName;
         private LinearLayout linearLayout;
+        private ImageView imageViewFavorite;
+        private ImageView imageViewMenu;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.textViewNameSong = itemView.findViewById(R.id.textView_SongName);
             this.textViewArtistName = itemView.findViewById(R.id.textView_ArtistName);
             this.linearLayout = itemView.findViewById(R.id.linearLayoutSongTitles);
+            this.imageViewFavorite = itemView.findViewById(R.id.imageViewFavorite);
+            this.imageViewMenu = itemView.findViewById(R.id.imageViewMenu);
         }
 
         public void loadView (String songName, String artistName) {

@@ -28,17 +28,37 @@ public class LoginActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         TextView textViewTopBar = findViewById(R.id.textViewTopBar);
-        textViewTopBar.setText("Login to Miscovery");
+        textViewTopBar.setText(R.string.login_login_to_miscovery);
 
         TextView textViewMessage = findViewById(R.id.textViewLoginMessage);
         textViewMessage.setText(bundle.getString(KEY_MESSAGE));
 
         // Se setea el ClickListener del boton <.
-        ImageView backButton = findViewById(R.id.imageViewBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        ImageView imageViewBackButton = findViewById(R.id.imageViewBack);
+        imageViewBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        // Se setea el ClickListener del boton para registrarse
+        TextView textViewCreateAccount = findViewById(R.id.textView_login_createAccount);
+        textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this,
+                        "Funcion: Registro de cuenta nueva", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Se setea el ClickListener del boton para recuperar cuenta
+        TextView textViewForgotPassword = findViewById(R.id.textView_login_forgotPassword);
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this,
+                        "Funcion: Recuperar password", Toast.LENGTH_SHORT).show();
             }
         });
     }
