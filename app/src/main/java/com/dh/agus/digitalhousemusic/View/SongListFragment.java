@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
@@ -79,11 +78,11 @@ public class SongListFragment extends Fragment {
 
         //Se agrega un background difuminado
         ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
-        RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(12));
+        RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
         Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
 
         // Se cambia el nombre del topbar
-        TextView textViewTopBarSongName = view.findViewById(R.id.textViewAlbumName);
+        TextView textViewTopBarSongName = view.findViewById(R.id.textViewTopBar);
         textViewTopBarSongName.setText(album.getTitle());
 
         return view;

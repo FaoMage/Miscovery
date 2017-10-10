@@ -6,4 +6,17 @@
         android:title="@string/favoritos"
         />
 
+    <item
+        android:id="@+id/item_menuMainActivity_login"
+        android:title="@string/login"
+        android:visible="true"
+        />
+
+    <item
+        android:id="@+id/item_menuMainActivity_logout"
+        android:title="@string/logout"
+        android:visible="false"
+        />
+
+
 </menu>

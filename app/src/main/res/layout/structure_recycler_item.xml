@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/colorTest">
+    android:background="@color/colorDarkBackground">
 
     <LinearLayout
         android:id="@+id/linearLayoutSongTitles"
@@ -39,13 +39,11 @@
         android:id="@+id/imageViewFavorite"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:src="@drawable/ic_favorite_border_accent_24dp"
         android:padding="15dp"
         android:layout_toLeftOf="@id/linearLayoutSongTitles"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-
-        android:tint="@color/colorAccent"/>
+        android:layout_alignParentLeft="true"/>
 
     <ImageView
         android:id="@+id/imageViewMenu"

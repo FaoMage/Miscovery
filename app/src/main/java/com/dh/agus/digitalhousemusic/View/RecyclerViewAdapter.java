@@ -42,13 +42,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.findViewById(R.id.imageViewFavorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.favoriteOnClick();
+                listener.favoriteOnClick(view);
             }
         });
         holder.itemView.findViewById(R.id.imageViewMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.menuOnClick();
+                listener.menuOnClick(view);
             }
         });
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +84,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public interface RecyclerViewInterface {
-        void favoriteOnClick ();
-        void menuOnClick ();
+        void favoriteOnClick (View view);
+        void menuOnClick (View view);
         void songOnClick(String songId);
     }
 }

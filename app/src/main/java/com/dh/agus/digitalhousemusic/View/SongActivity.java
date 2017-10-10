@@ -57,7 +57,7 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
             Track track = response.body();
             TextView textViewSongName = (TextView) findViewById(R.id.textViewSongName);
             TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
-            TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewAlbumName);
+            TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewTopBar);
 
             textViewSongName.setText(track.getTitle());
 
@@ -70,7 +70,7 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
             ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
 
             // Carga la imagen blureada al background
-            RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(12));
+            RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
             Glide.with(this).load(album.getCoverMedium()).apply(requestOptions).into(backgroundImageView);
 
             // Carga la imagen del album principal

@@ -11,8 +11,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigation"
-        android:background="@color/colorTest">
+        android:layout_above="@+id/navigation">
 
         <ImageView
             android:id="@+id/imageViewBackground"
@@ -23,8 +22,10 @@
             android:scaleType="centerCrop"/>
 
         <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorDarkBackground">
 
         <include layout="@layout/top_bar_layout"/>
 
