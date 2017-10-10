@@ -3,5 +3,8 @@
 
     <string name="menu_home">Home</string>>
     <string name="favoritos">Favoritos</string>
-    <string name="menu">MENU</string>
+    <string name="menu">enu</string>
+    <string name="login_favorites_mensaje">Hola! Para agregar una cancion a favoritos debes loguearte, es simple!</string>
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
 </resources>

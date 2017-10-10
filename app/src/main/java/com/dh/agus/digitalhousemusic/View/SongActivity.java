@@ -9,13 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
-import com.squareup.picasso.Picasso;
 
-import at.favre.lib.dali.Dali;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +44,6 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
 
             response.enqueue(this);
         }
-
     }
 
     @Override
@@ -57,7 +57,7 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
             Track track = response.body();
             TextView textViewSongName = (TextView) findViewById(R.id.textViewSongName);
             TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
-            TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewAlbumName);
+            TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewTopBar);
 
             textViewSongName.setText(track.getTitle());
 
@@ -66,13 +66,15 @@ public class SongActivity extends AppCompatActivity implements Callback<Track> {
 
             textViewTopBarSongName.setText(track.getTitle());
 
-
             ImageView imageAlbum = (ImageView) findViewById(R.id.imageViewAlbumImage);
-            Picasso.with(this).load(album.getCoverMedium()).into(imageAlbum);
-
             ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
-            Dali.create(this).load(imageAlbum).blurRadius(25).into(backgroundImageView);
 
+            // Carga la imagen blureada al background
+            RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
+            Glide.with(this).load(album.getCoverMedium()).apply(requestOptions).into(backgroundImageView);
+
+            // Carga la imagen del album principal
+            Glide.with(this).load(album.getCoverMedium()).into(imageAlbum);
 
             //agrego el back
             ImageView imageViewBack = (ImageView) findViewById(R.id.imageViewBack);

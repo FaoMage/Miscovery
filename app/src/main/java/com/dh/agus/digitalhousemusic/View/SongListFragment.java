@@ -12,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +50,7 @@ public class SongListFragment extends Fragment {
         List<Track> songsList = dataTracksList.getData();
 
         // Se infla la view
-        View view = inflater.inflate(R.layout.fragment_main_activity, container, false);
+        View view = inflater.inflate(R.layout.fragment_song_list, container, false);
 
         // Se setea el ClickListener del boton <.
         ImageView backButton = view.findViewById(R.id.imageViewBack);
@@ -62,7 +65,6 @@ public class SongListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
 
         // RecyclerViewAdapter | getActivity pasa la información directamente a la actividad
-        //todo explicar que es el (RecyclerViewAdapter.RecyclerViewInterface) getActivity()
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
                 songsList, (RecyclerViewAdapter.RecyclerViewInterface) getActivity());
 
@@ -76,10 +78,11 @@ public class SongListFragment extends Fragment {
 
         //Se agrega un background difuminado
         ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
-        Picasso.with(getContext()).load(album.getCoverMedium()).into(imageViewSongListBackground);
+        RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
+        Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
 
         // Se cambia el nombre del topbar
-        TextView textViewTopBarSongName = view.findViewById(R.id.textViewAlbumName);
+        TextView textViewTopBarSongName = view.findViewById(R.id.textViewTopBar);
         textViewTopBarSongName.setText(album.getTitle());
 
         return view;
