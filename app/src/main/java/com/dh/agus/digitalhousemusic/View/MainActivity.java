@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -83,6 +84,32 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_home:
+                        HomeFragment homeFragment = new HomeFragment();
+                        changeFragment(homeFragment,NOT_HOME);
+                        break;
+
+                    case R.id.menu_favorites:
+                        SongListFragment songListFragment =
+                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
+                        changeFragment(songListFragment,NOT_HOME);
+                        break;
+
+                    case R.id.menu_playlist:
+                        PlaylistFragment playlistFragment = new PlaylistFragment();
+                        changeFragment(playlistFragment,NOT_HOME);
+                        break;
+                }
+
+                return false;
+            }
+        });
     }
 
     private Favoritos loadHardcodeFavoritos () {
@@ -141,7 +168,8 @@ public class MainActivity extends AppCompatActivity
         // Busca el fragment actual
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);
         // Si el Fragment es null o distinto al que quiero cargar
-        if (loadedFragment == null || !loadedFragment.equals(fragment)) {
+        //todo mostrar solucion del bug a pedro
+        if (loadedFragment == null || !loadedFragment.getClass().equals(fragment.getClass())) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_mainActivity,fragment,tag);
             // Si es el Fragment Home, lo agrega al backstack

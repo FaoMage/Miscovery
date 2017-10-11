@@ -11,4 +11,9 @@
         android:title="@string/menu_favoritos"
         android:icon="@drawable/ic_favorite_border_accent_24dp"
         />
+
+    <item
+        android:id="@+id/menu_playlist"
+        android:title="@string/menu_playlist"
+        android:icon="@drawable/ic_playlist_play_white_24px"/>
 </menu>

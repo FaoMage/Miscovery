@@ -57,7 +57,7 @@ public class SongListFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Funcion: Volver a lista de albumes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Funcion: Volver atras", Toast.LENGTH_SHORT).show();
             }
         });
 

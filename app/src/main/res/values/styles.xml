@@ -32,4 +32,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="SearchStyle" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/colorLightGrey</item>
+    </style>
+
 </resources>
