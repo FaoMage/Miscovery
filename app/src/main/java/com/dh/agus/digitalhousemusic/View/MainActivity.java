@@ -169,7 +169,8 @@ public class MainActivity extends AppCompatActivity
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);
         // Si el Fragment es null o distinto al que quiero cargar
         //todo mostrar solucion del bug a pedro
-        if (loadedFragment == null || !loadedFragment.getClass().equals(fragment.getClass())) {
+        //if (loadedFragment == null || !loadedFragment.getClass().equals(fragment.getClass())) {
+        if (loadedFragment == null || !loadedFragment.equals(fragment)) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_mainActivity,fragment,tag);
             // Si es el Fragment Home, lo agrega al backstack
