@@ -36,7 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Track track = songsList.get(position);
         holder.loadView(track.getTitle(), track.getArtist().getName());
 
@@ -55,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.songOnClick(track.getId());
+                listener.songOnClick(position, songsList);
             }
         });
     }
@@ -91,6 +91,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface RecyclerViewInterface {
         void favoriteOnClick (View view);
         void menuOnClick (View view);
-        void songOnClick(String songId);
+        void songOnClick(Integer songPosition, List<Track> trackList);
     }
 }

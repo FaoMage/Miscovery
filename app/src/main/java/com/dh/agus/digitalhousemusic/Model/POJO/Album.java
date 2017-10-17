@@ -86,7 +86,10 @@ public class Album implements Parcelable {
     }
 
     public String getTitle() {
-        return title;
+        if(title != null && !title.trim().isEmpty()) {
+            return title;
+        }
+        return "-";
     }
 
     public void setTitle(String title) {
@@ -118,7 +121,10 @@ public class Album implements Parcelable {
     }
 
     public String getCoverMedium() {
-        return coverMedium;
+        if(coverMedium != null && !coverMedium.trim().isEmpty()) {
+            return coverMedium;
+        }
+        return "";
     }
 
     public void setCoverMedium(String coverMedium) {

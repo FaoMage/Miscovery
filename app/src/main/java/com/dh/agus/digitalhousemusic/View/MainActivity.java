@@ -28,6 +28,7 @@ import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,8 +60,8 @@ public class MainActivity extends AppCompatActivity
         response.enqueue(this);
 
         // Busco el DrawerLayout y NavigationView
-        final DrawerLayout drawerLayout = findViewById(R.id.drawer_mainActivity);
-        navigationView = findViewById(R.id.navigationView_mainActivity);
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_mainActivity);
+        navigationView = (NavigationView) findViewById(R.id.navigationView_mainActivity);
         // Le seteo el onSelectedListener
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity
             loggedEmail = bundle.getString(KEY_EMAIL);
 
             // Seteo el email en el drawer
-            TextView textView = findViewById(R.id.textView_header_loggedEmail);
+            TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
             textView.setText(loggedEmail);
 
             changeLoginLogout();
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity
     private void logout () {
         logged = false;
         loggedEmail = null;
-        TextView textView = findViewById(R.id.textView_header_loggedEmail);
+        TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
         textView.setText(loggedEmail);
         changeLoginLogout();
     }
@@ -261,13 +262,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void songOnClick(String songId) {
+    public void songOnClick(Integer songPosition, List<Track> trackList) {
         Intent intent = new Intent(this, SongActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString(SongActivity.SONG_ID, songId);
+        bundle.putInt(SongActivity.SONG_POSITION, songPosition);
+        ArrayList<Track> trackArrayList = (ArrayList<Track>) trackList;
+        bundle.putParcelableArrayList(SongActivity.SONG_TRACKLIST, trackArrayList);
 
         intent.putExtras(bundle);
-        intent.putExtra(Intent.EXTRA_TEXT, songId);
         startActivity(intent);
     }
 }

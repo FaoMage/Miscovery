@@ -27,14 +27,14 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        TextView textViewTopBar = findViewById(R.id.textViewTopBar);
+        TextView textViewTopBar = (TextView) findViewById(R.id.textViewTopBar);
         textViewTopBar.setText(R.string.login_login_to_miscovery);
 
-        TextView textViewMessage = findViewById(R.id.textViewLoginMessage);
+        TextView textViewMessage = (TextView) findViewById(R.id.textViewLoginMessage);
         textViewMessage.setText(bundle.getString(KEY_MESSAGE));
 
         // Se setea el ClickListener del boton <.
-        ImageView imageViewBackButton = findViewById(R.id.imageViewBack);
+        ImageView imageViewBackButton = (ImageView) findViewById(R.id.imageViewBack);
         imageViewBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Se setea el ClickListener del boton para registrarse
-        TextView textViewCreateAccount = findViewById(R.id.textView_login_createAccount);
+        TextView textViewCreateAccount = (TextView) findViewById(R.id.textView_login_createAccount);
         textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Se setea el ClickListener del boton para recuperar cuenta
-        TextView textViewForgotPassword = findViewById(R.id.textView_login_forgotPassword);
+        TextView textViewForgotPassword = (TextView) findViewById(R.id.textView_login_forgotPassword);
         textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,10 +70,10 @@ public class LoginActivity extends AppCompatActivity {
     public void login (View view) {
         Boolean inputEmailOk = false;
         Boolean inputPasswordOk = false;
-        TextInputLayout textInputLayoutEmail = findViewById(R.id.textInputLayout_login_email);
-        TextInputLayout textInputLayoutPassword = findViewById(R.id.textInputLayout_login_password);
-        EditText editTextEmail = findViewById(R.id.editText_login_email);
-        EditText editTextPassword = findViewById(R.id.editText_login_password);
+        TextInputLayout textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayout_login_email);
+        TextInputLayout textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_login_password);
+        EditText editTextEmail = (EditText) findViewById(R.id.editText_login_email);
+        EditText editTextPassword = (EditText) findViewById(R.id.editText_login_password);
 
         if (!isValidEmail(editTextEmail.getText().toString())) {
             textInputLayoutEmail.setError("Ingrese un email valido.");

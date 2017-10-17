@@ -128,7 +128,10 @@ public class Track implements Parcelable {
     }
 
     public String getTitle() {
-        return title;
+        if(title != null && !title.trim().isEmpty()) {
+            return title;
+        }
+        return "-";
     }
 
     public void setTitle(String title) {
