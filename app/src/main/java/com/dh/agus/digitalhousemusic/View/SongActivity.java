@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 
@@ -19,7 +20,9 @@ import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-public class SongActivity extends AppCompatActivity implements TrackFragment.TrackFragmentInterface {
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
+public class SongActivity extends AppCompatActivity {
     static final String SONG_POSITION = "song_position";
     static final String SONG_TRACKLIST= "song_tracklist";
     ViewPager viewPager;
@@ -32,7 +35,7 @@ public class SongActivity extends AppCompatActivity implements TrackFragment.Tra
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
-            ArrayList<Track> trackList = bundle.getParcelableArrayList(this.SONG_TRACKLIST);
+            final ArrayList<Track> trackList = bundle.getParcelableArrayList(this.SONG_TRACKLIST);
             Integer trackPosition = bundle.getInt(this.SONG_POSITION);
 
             setContentView(R.layout.song_activity);
@@ -42,6 +45,37 @@ public class SongActivity extends AppCompatActivity implements TrackFragment.Tra
                     trackList);
             viewPager.setAdapter(adapter);
             viewPager.setCurrentItem(trackPosition);
+
+            ViewPager.OnPageChangeListener pagerList = new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int i, float v, int i1) {}
+
+                @Override
+                public void onPageSelected(int i) {
+                    Track track = trackList.get(i);
+                    // TODO - ver porque no levanta el album
+                    Album album = track.getAlbum();
+
+                    TextView textViewSongName = (TextView) findViewById(R.id.textViewSongName);
+                    textViewSongName.setText(track.getTitle());
+
+                    TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
+                    textViewAlbumName.setText("Toxicity");
+
+                    TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewTopBar);
+                    textViewTopBarSongName.setText("Toxicity");
+
+                    // Carga la imagen blureada al background
+                    RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
+                    ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
+                    Glide.with(SongActivity.this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").apply(requestOptions).transition(withCrossFade()).into(backgroundImageView);
+                }
+                @Override
+                public void onPageScrollStateChanged(int i) {}
+            };
+
+            viewPager.addOnPageChangeListener(pagerList);
+            pagerList.onPageSelected(trackPosition);
 
             ImageView imageViewPrevious = (ImageView) findViewById(R.id.imageViewPrevious);
             imageViewPrevious.setOnClickListener(new View.OnClickListener() {
@@ -77,22 +111,6 @@ public class SongActivity extends AppCompatActivity implements TrackFragment.Tra
                 }
             });
         }
-    }
-
-    public void implementFragment(String title, String albumTitle, String albumCover) {
-        TextView textViewSongName = (TextView) findViewById(R.id.textViewSongName);
-        textViewSongName.setText(title);
-
-        TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
-        textViewAlbumName.setText(albumTitle);
-
-        TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewTopBar);
-        textViewTopBarSongName.setText(title);
-
-        // Carga la imagen blureada al background
-        RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
-        ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
-        Glide.with(this).load(albumCover).apply(requestOptions).into(backgroundImageView);
     }
 
     private int getItem(int i) {

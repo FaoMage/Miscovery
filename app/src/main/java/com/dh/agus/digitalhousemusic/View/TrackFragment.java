@@ -27,7 +27,6 @@ public class TrackFragment extends Fragment {
         trackFragment.setArguments(bundle);
 
         return trackFragment;
-
     }
 
 
@@ -46,14 +45,7 @@ public class TrackFragment extends Fragment {
 
         ImageView imageAlbum = (ImageView) view.findViewById(R.id.imageViewAlbumImage);
         Glide.with(this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").into(imageAlbum);
-
-        TrackFragmentInterface tfi = (TrackFragmentInterface) getContext();
-        tfi.implementFragment(track.getTitle(), "Toxicity", "https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg");
-
         return view;
     }
 
-    public interface TrackFragmentInterface{
-        void implementFragment(String title, String albumTitle, String albumCover);
-    }
 }
