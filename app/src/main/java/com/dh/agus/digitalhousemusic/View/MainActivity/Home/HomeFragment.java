@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dh.agus.digitalhousemusic.Controller.Controller;
+import com.dh.agus.digitalhousemusic.Model.DAO.ResultListener;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity;
@@ -68,33 +69,21 @@ public class HomeFragment extends Fragment {
 
     private void getTestList () {
         Controller controller = new Controller();
-        controller.getAlbum("5979050", new Callback<Album>() {
+        controller.getAlbum("5979050", new ResultListener<Album>() {
             @Override
-            public void onResponse(Call<Album> call, Response<Album> response) {
-                Album album = response.body();
-                albumList.add(album);
+            public void finish(Album result) {
+                albumList.add(result);
                 recentListenedRecyclerViewAdapter.updateList(albumList);
                 recentListenedRecyclerViewAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<Album> call, Throwable throwable) {
-
             }
         });
 
-        controller.getAlbum("302127", new Callback<Album>() {
+        controller.getAlbum("302127", new ResultListener<Album>() {
             @Override
-            public void onResponse(Call<Album> call, Response<Album> response) {
-                Album album = response.body();
-                albumList.add(album);
+            public void finish(Album result) {
+                albumList.add(result);
                 recentListenedRecyclerViewAdapter.updateList(albumList);
                 recentListenedRecyclerViewAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<Album> call, Throwable throwable) {
-
             }
         });
     }

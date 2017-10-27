@@ -21,8 +21,8 @@ public class DAODeezer {
         service = retrofit.create(serviceDeezer.class);
     }
 
-    public void getAlbum (String albumId, Callback<Album> albumCallback) {
+    public void getAlbum (String albumId, Callback<Album> controllerCallback) {
         Call<Album> response = service.getAlbum(albumId);
-        response.enqueue(albumCallback);
+        response.enqueue(controllerCallback);
     }
 }
