@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.dh.agus.digitalhousemusic.View.HomeFragment"
-    android:background="@color/colorPrimaryDark">
+    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.Home.HomeFragment"
+    android:background="@color/colorPrimaryDark"
+    android:focusableInTouchMode="true">
 
     <include layout="@layout/top_bar_layout"/>
 
     <android.support.v7.widget.SearchView
+        android:id="@+id/searchView"
         android:theme="@style/SearchStyle"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -34,17 +36,13 @@
         android:text="Recientemente escuchado"
         android:textSize="16sp"
         android:textColor="@color/colorLightGrey"
-        android:layout_margin="20dp"
+        android:layout_margin="15dp"
         android:layout_gravity="center"/>
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Recientemente escuchados aun sin implementar"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"/>
-
-
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp" />
 </LinearLayout>

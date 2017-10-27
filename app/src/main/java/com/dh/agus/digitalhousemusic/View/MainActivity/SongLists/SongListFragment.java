@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.MainActivity.SongLists;
 
 
 import android.os.Bundle;
@@ -62,18 +62,18 @@ public class SongListFragment extends Fragment {
         });
 
         // Se crea el RecyclerView.
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_songListFragment);
 
-        // RecyclerViewAdapter | getActivity pasa la información directamente a la actividad
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
-                songsList, (RecyclerViewAdapter.RecyclerViewInterface) getActivity());
+        // SongListRecyclerViewAdapter | getActivity pasa la información directamente a la actividad
+        SongListRecyclerViewAdapter songListRecyclerViewAdapter = new SongListRecyclerViewAdapter(getContext(),
+                songsList, (SongListRecyclerViewAdapter.RecyclerViewInterface) getActivity());
 
         // Se crea el layoutManager
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
 
         // Se setean el adapter y el layoutManager
-        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setAdapter(songListRecyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
         //Se agrega un background difuminado

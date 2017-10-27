@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,28 +19,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
-import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.View.LoginActivity.LoginActivity;
+import com.dh.agus.digitalhousemusic.View.MainActivity.Home.HomeFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecyclerViewAdapter;
+import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer.retrofit;
-
 public class MainActivity extends AppCompatActivity
-        implements RecyclerViewAdapter.RecyclerViewInterface, Callback<Album> {
+        implements SongListRecyclerViewAdapter.RecyclerViewInterface {
 
-    private static final String HOME = "HOME";
-    private static final String NOT_HOME = "NOT_HOME";
+    public static final String HOME = "HOME";
+    public static final String NOT_HOME = "NOT_HOME";
 
     public static final String KEY_EMAIL = "KEY_EMAIL";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
@@ -49,15 +47,18 @@ public class MainActivity extends AppCompatActivity
 
     private NavigationView navigationView;
 
+    private HomeFragment homeFragment;
+    private SongListFragment favoriteSongListFragment;
+    private PlaylistFragment playlistFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final serviceDeezer service = retrofit.create(serviceDeezer.class);
-        //Call<Album> response = service.getAlbum("302127");
-        Call<Album> response = service.getAlbum("5979050");
-        response.enqueue(this);
+        homeFragment = new HomeFragment();
+        favoriteSongListFragment = SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
+        playlistFragment = new PlaylistFragment();
 
         // Busco el DrawerLayout y NavigationView
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_mainActivity);
@@ -67,12 +68,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.item_menuMainActivity_favoritos:
-                        SongListFragment songListFragment =
-                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
-                        changeFragment(songListFragment,NOT_HOME);
-                        break;
-
                     case R.id.item_menuMainActivity_login:
                         login(null);
                         break;
@@ -92,18 +87,14 @@ public class MainActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_home:
-                        HomeFragment homeFragment = new HomeFragment();
-                        changeFragment(homeFragment,NOT_HOME);
+                        changeFragment(homeFragment,HOME);
                         break;
 
                     case R.id.menu_favorites:
-                        SongListFragment songListFragment =
-                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
-                        changeFragment(songListFragment,NOT_HOME);
+                        changeFragment(favoriteSongListFragment,NOT_HOME);
                         break;
 
                     case R.id.menu_playlist:
-                        PlaylistFragment playlistFragment = new PlaylistFragment();
                         changeFragment(playlistFragment,NOT_HOME);
                         break;
                 }
@@ -111,6 +102,8 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+        View view = bottomNavigationView.findViewById(R.id.menu_home);
+        view.performClick();
     }
 
     private Favoritos loadHardcodeFavoritos () {
@@ -147,30 +140,12 @@ public class MainActivity extends AppCompatActivity
         return favoritos;
     }
 
-    @Override
-    public void onResponse(Call<Album> call, Response<Album> response) {
-        int code = response.code();
-        if (code == 200) {
-            // Saca el album del response
-            Album album = response.body();
-
-            // Crea el nuevo Fragment y lo cambia
-            SongListFragment songListFragment =
-                    SongListFragment.SongListFragmentFactory(album);
-            changeFragment(songListFragment,HOME);
-        } else {
-            System.out.println("Error");
-        }
-    }
-
     // Cambia el fragment actual por el enviado por parametro
-    private void changeFragment (Fragment fragment, String tag) {
+    public void changeFragment (Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Busca el fragment actual
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);
         // Si el Fragment es null o distinto al que quiero cargar
-        //todo mostrar solucion del bug a pedro
-        //if (loadedFragment == null || !loadedFragment.getClass().equals(fragment.getClass())) {
         if (loadedFragment == null || !loadedFragment.equals(fragment)) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_mainActivity,fragment,tag);
@@ -235,12 +210,6 @@ public class MainActivity extends AppCompatActivity
             login.setVisible(true);
             logout.setVisible(false);
         }
-    }
-
-    // Override de Retrofit
-    @Override
-    public void onFailure(Call<Album> call, Throwable throwable) {
-        System.out.println("Error Fatal");
     }
 
     // Override de onclicks

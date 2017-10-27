@@ -1,19 +1,29 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.dh.agus.digitalhousemusic.View.PlaylistFragment">
-
-    <include layout="@layout/top_bar_layout"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Pantalla playlist aun sin implementar"
-        android:textSize="40sp"
+        android:text="Aun no tienes playlists para mostrar"
+        android:textSize="20sp"
         android:gravity="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorLightGrey"
         android:background="@color/colorPrimaryDark"/>
 
-</LinearLayout>
+    <include layout="@layout/top_bar_layout"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_playlist_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:src="@drawable/ic_playlist_add_black_24dp"
+        android:layout_margin="15dp"
+        android:layout_gravity="bottom|right"/>
+
+</FrameLayout>

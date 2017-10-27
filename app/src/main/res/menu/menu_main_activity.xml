@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_menuMainActivity_favoritos"
-        android:title="@string/menu_favoritos"
-        />
-
-    <item
         android:id="@+id/item_menuMainActivity_login"
         android:title="@string/menu_login"
         android:visible="true"

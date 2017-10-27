@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.TrackActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +23,8 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class SongActivity extends AppCompatActivity {
-    static final String SONG_POSITION = "song_position";
-    static final String SONG_TRACKLIST= "song_tracklist";
+    public static final String SONG_POSITION = "song_position";
+    public static final String SONG_TRACKLIST= "song_tracklist";
     ViewPager viewPager;
 
     @Override

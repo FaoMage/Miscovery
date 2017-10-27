@@ -1,9 +1,12 @@
 package com.dh.agus.digitalhousemusic.Model.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Artist {
+public class Artist implements Parcelable{
 
     @SerializedName("id")
     @Expose
@@ -45,6 +48,32 @@ public class Artist {
     public Artist(String name) {
         this.name = name;
     }
+
+    protected Artist(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        link = in.readString();
+        share = in.readString();
+        picture = in.readString();
+        pictureSmall = in.readString();
+        pictureMedium = in.readString();
+        pictureBig = in.readString();
+        pictureXl = in.readString();
+        tracklist = in.readString();
+        type = in.readString();
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -142,5 +171,24 @@ public class Artist {
         this.type = type;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(link);
+        parcel.writeString(share);
+        parcel.writeString(picture);
+        parcel.writeString(pictureSmall);
+        parcel.writeString(pictureMedium);
+        parcel.writeString(pictureBig);
+        parcel.writeString(pictureXl);
+        parcel.writeString(tracklist);
+        parcel.writeString(type);
+    }
 }
 
