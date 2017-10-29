@@ -7,4 +7,6 @@
     <color name="colorLightGrey">#919191</color>
     <color name="colorDarkGrey">#363535</color>
     <color name="colorDarkBackground">#82000000</color>
+
+    <color name="colorTransparent">#00000000</color>
 </resources>

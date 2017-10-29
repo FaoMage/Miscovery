@@ -51,7 +51,8 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClickAlbum(Album album) {
                         MainActivity m = (MainActivity) getContext();
-                        SongListFragment songListFragment = SongListFragment.SongListFragmentFactory(album);
+                        SongListFragment songListFragment =
+                                SongListFragment.SongListFragmentFactory(album,SongListFragment.TYPE_COMMON);
                         m.changeFragment(songListFragment,MainActivity.NOT_HOME);
                     }
                 };

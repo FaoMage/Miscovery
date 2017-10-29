@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         homeFragment = new HomeFragment();
-        favoriteSongListFragment = SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
+        favoriteSongListFragment =
+                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos(),SongListFragment.TYPE_FAVORITE);
         playlistFragment = new PlaylistFragment();
 
         // Busco el DrawerLayout y NavigationView
@@ -145,15 +146,21 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Busca el fragment actual
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);
-        // Si el Fragment es null o distinto al que quiero cargar
+        // Si el Fragment actual es null o distinto al que quiero cargar
         if (loadedFragment == null || !loadedFragment.equals(fragment)) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_mainActivity,fragment,tag);
-            // Si es el Fragment Home, lo agrega al backstack
-            if (loadedFragment != null && loadedFragment.getTag().equals(HOME)) {
-                fragmentTransaction.addToBackStack(null);
+            // Si el Fragment que quiero cargar es Home y ya hay un Home en backstack
+            if (tag.equals(HOME) && fragmentManager.getBackStackEntryCount() > 0) {
+                // Pone el que estaba en el backstack
+                fragmentManager.popBackStack();
+            } else {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_mainActivity, fragment, tag);
+                // Si el ultimo fragment cargado es el Home, lo agrega al backstack
+                if (loadedFragment != null && loadedFragment.getTag().equals(HOME)) {
+                    fragmentTransaction.addToBackStack(null);
+                }
+                fragmentTransaction.commit();
             }
-            fragmentTransaction.commit();
         }
     }
 

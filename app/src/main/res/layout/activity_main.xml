@@ -23,7 +23,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_navigation"
             android:animateLayoutChanges="true"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimaryDark"/>
 
         <include layout="@layout/bottom_navigation"/>
     </RelativeLayout>
