@@ -1,140 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<LinearLayout
     android:id="@+id/song_activity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity">
+    android:orientation="vertical"
+    >
+    <include layout="@layout/toolbar"/>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation">
+        tools:context="com.dh.agus.digitalhousemusic.View.MainActivity">
 
-        <ImageView
-            android:id="@+id/imageViewBackground"
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:background="#50000000"
-            android:scaleType="centerCrop"/>
+            android:layout_above="@+id/bottom_navigation">
 
-        <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorDarkBackground">
-
-        <include layout="@layout/top_bar_layout"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.v4.view.ViewPager
+            <ImageView
+                android:id="@+id/imageViewBackground"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:id="@+id/trackAlbumImageViewPager"/>
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="#50000000"
+                android:scaleType="centerCrop"/>
 
-            <RelativeLayout
-                android:layout_width="300dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="2">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorDarkBackground">
 
-                <TextView
-                    android:id="@+id/textViewSongName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:theme="@style/SongName"
-                    />
 
-                <TextView
-                    android:id="@+id/textViewSongAlbumName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/textViewSongName"
-                    android:theme="@style/SongName" />
-
-                <ProgressBar
-                    android:id="@+id/textViewProgressBar"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@android:style/Widget.Holo.ProgressBar.Horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/textViewSongAlbumName" />
-
-                <TextView
-                    android:id="@+id/textViewProgressBarStarts"
-                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/textViewProgressBar"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignLeft="@+id/textViewProgressBar"
-                    android:theme="@style/SongTimeReference"
-                    android:text="0:46"/>
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewProgressBarEnds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/textViewProgressBar"
-                    android:layout_alignRight="@+id/textViewProgressBar"
-                    android:theme="@style/SongTimeReference"
-                    android:text="3:34"/>
+                    <android.support.v4.view.ViewPager
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="4"
+                        android:id="@+id/trackAlbumImageViewPager"/>
+
+                    <RelativeLayout
+                        android:layout_width="300dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/textViewSongName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:theme="@style/SongName"
+                            />
+
+                        <TextView
+                            android:id="@+id/textViewSongAlbumName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/textViewSongName"
+                            android:theme="@style/SongName" />
+
+                        <ProgressBar
+                            android:id="@+id/textViewProgressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/textViewSongAlbumName" />
+
+                        <TextView
+                            android:id="@+id/textViewProgressBarStarts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/textViewProgressBar"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignLeft="@+id/textViewProgressBar"
+                            android:theme="@style/SongTimeReference"
+                            android:text="0:46"/>
+
+                        <TextView
+                            android:id="@+id/textViewProgressBarEnds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/textViewProgressBar"
+                            android:layout_alignRight="@+id/textViewProgressBar"
+                            android:theme="@style/SongTimeReference"
+                            android:text="3:34"/>
 
 
-            </RelativeLayout>
+                    </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/imageViewPause"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_pause_black_24dp"
-                    android:theme="@style/WhiteVector"
-                    />
+                        <ImageView
+                            android:id="@+id/imageViewPause"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/ic_pause_black_24dp"
+                            android:theme="@style/WhiteVector"
+                            />
 
-                <ImageView
-                    android:id="@+id/imageViewPrevious"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_toLeftOf="@id/imageViewPause"
-                    android:layout_toStartOf="@id/imageViewPause"
-                    android:src="@drawable/ic_skip_previous_black_24dp"
-                    android:theme="@style/WhiteVector"
-                    />
+                        <ImageView
+                            android:id="@+id/imageViewPrevious"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_toLeftOf="@id/imageViewPause"
+                            android:layout_toStartOf="@id/imageViewPause"
+                            android:src="@drawable/ic_skip_previous_black_24dp"
+                            android:theme="@style/WhiteVector"
+                            />
 
-                <ImageView
-                    android:id="@+id/imageViewNext"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_toRightOf="@id/imageViewPause"
-                    android:layout_toEndOf="@id/imageViewPause"
-                    android:src="@drawable/ic_skip_next_black_24dp"
-                    android:theme="@style/WhiteVector"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/imageViewNext"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_toRightOf="@id/imageViewPause"
+                            android:layout_toEndOf="@id/imageViewPause"
+                            android:src="@drawable/ic_skip_next_black_24dp"
+                            android:theme="@style/WhiteVector"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
 
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-    </FrameLayout>
+        </FrameLayout>
 
-    <include layout="@layout/bottom_navigation"/>
-</RelativeLayout>
+        <include layout="@layout/bottom_navigation"/>
+    </RelativeLayout>
+</LinearLayout>
+
+

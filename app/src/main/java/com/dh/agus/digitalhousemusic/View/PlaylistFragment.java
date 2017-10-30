@@ -23,16 +23,6 @@ public class PlaylistFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_playlist, container, false);
 
-        TextView textViewTopBar = view.findViewById(R.id.textViewTopBar);
-        textViewTopBar.setText(R.string.menu_playlist);
-        ImageView imageViewBack = view.findViewById(R.id.imageViewBack);
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Funcion: Volver atras", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         return view;
     }
 

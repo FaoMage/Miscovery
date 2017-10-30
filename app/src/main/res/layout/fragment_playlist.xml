@@ -5,8 +5,6 @@
     android:orientation="vertical"
     tools:context="com.dh.agus.digitalhousemusic.View.PlaylistFragment">
 
-    <include layout="@layout/top_bar_layout"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

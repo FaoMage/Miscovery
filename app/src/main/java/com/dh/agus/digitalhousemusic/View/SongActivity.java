@@ -22,7 +22,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class SongActivity extends AppCompatActivity {
+public class SongActivity extends AppActivity {
     static final String SONG_POSITION = "song_position";
     static final String SONG_TRACKLIST= "song_tracklist";
     ViewPager viewPager;
@@ -39,6 +39,9 @@ public class SongActivity extends AppCompatActivity {
             Integer trackPosition = bundle.getInt(this.SONG_POSITION);
 
             setContentView(R.layout.song_activity);
+
+            setAppBarContext(SongActivity.this, this);
+            implementAppBar();
 
             viewPager = (ViewPager) findViewById(R.id.trackAlbumImageViewPager);
             TrackViewPagerAdapter adapter = new TrackViewPagerAdapter(getSupportFragmentManager(),
@@ -62,8 +65,7 @@ public class SongActivity extends AppCompatActivity {
                     TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
                     textViewAlbumName.setText("Toxicity");
 
-                    TextView textViewTopBarSongName = (TextView) findViewById(R.id.textViewTopBar);
-                    textViewTopBarSongName.setText("Toxicity");
+                    setTitle("Toxicity");
 
                     // Carga la imagen blureada al background
                     RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
@@ -99,15 +101,6 @@ public class SongActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Toast.makeText(SongActivity.this,
                             "Pausa la cancion", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ImageView imageViewBack = (ImageView) findViewById(R.id.imageViewBack);
-            imageViewBack.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(SongActivity.this,
-                            "Vuelve a la lista", Toast.LENGTH_SHORT).show();
                 }
             });
         }
