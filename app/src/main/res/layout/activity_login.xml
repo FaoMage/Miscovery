@@ -8,7 +8,7 @@
     tools:context="com.dh.agus.digitalhousemusic.View.LoginActivity"
     android:background="@color/colorPrimaryDark">
 
-    <include layout="@layout/top_bar_layout"/>
+    <include layout="@layout/toolbar"/>
 
     <ImageView
         android:layout_width="120dp"

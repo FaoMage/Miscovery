@@ -24,23 +24,16 @@ public class LoginActivity extends AppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setAppBarContext(LoginActivity.this, this);
+        implementAppBar();
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        TextView textViewTopBar = (TextView) findViewById(R.id.textViewTopBar);
-        textViewTopBar.setText(R.string.login_login_to_miscovery);
+        setTitle(R.string.login_login_to_miscovery);
 
         TextView textViewMessage = (TextView) findViewById(R.id.textViewLoginMessage);
         textViewMessage.setText(bundle.getString(KEY_MESSAGE));
-
-        // Se setea el ClickListener del boton <.
-        ImageView imageViewBackButton = (ImageView) findViewById(R.id.imageViewBack);
-        imageViewBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         // Se setea el ClickListener del boton para registrarse
         TextView textViewCreateAccount = (TextView) findViewById(R.id.textView_login_createAccount);
