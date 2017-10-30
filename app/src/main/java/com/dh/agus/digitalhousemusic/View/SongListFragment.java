@@ -52,15 +52,6 @@ public class SongListFragment extends Fragment {
         // Se infla la view
         View view = inflater.inflate(R.layout.fragment_song_list, container, false);
 
-        // Se setea el ClickListener del boton <.
-        ImageView backButton = view.findViewById(R.id.imageViewBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Funcion: Volver atras", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         // Se crea el RecyclerView.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
 
@@ -80,10 +71,6 @@ public class SongListFragment extends Fragment {
         ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
         RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
         Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
-
-        // Se cambia el nombre del topbar
-        TextView textViewTopBarSongName = view.findViewById(R.id.textViewTopBar);
-        textViewTopBarSongName.setText(album.getTitle());
 
         return view;
     }
