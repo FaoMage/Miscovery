@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppActivity {
 
     public static final Integer REQUEST_LOGIN = 125;
     public static final String KEY_MESSAGE = "KEY_MESSAGE";

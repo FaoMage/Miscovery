@@ -33,10 +33,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.support.v7.widget.Toolbar;
 
 import static com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer.retrofit;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppActivity
         implements RecyclerViewAdapter.RecyclerViewInterface, Callback<Album> {
 
     private static final String HOME = "HOME";
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setAppBarContext(MainActivity.this, this);
+        implementAppBar();
+        implementActivityDrawer(R.id.drawer_mainActivity);
 
         final serviceDeezer service = retrofit.create(serviceDeezer.class);
         //Call<Album> response = service.getAlbum("302127");
@@ -153,6 +158,7 @@ public class MainActivity extends AppCompatActivity
         if (code == 200) {
             // Saca el album del response
             Album album = response.body();
+            setTitle(album.getTitle());
 
             // Crea el nuevo Fragment y lo cambia
             SongListFragment songListFragment =

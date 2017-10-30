@@ -15,6 +15,9 @@
     <string name="login_password">contraseña</string>
     <string name="login_email">email</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="test">test test test</string>
 
     <!-- TODO: Remove or change this placeholder text -->
