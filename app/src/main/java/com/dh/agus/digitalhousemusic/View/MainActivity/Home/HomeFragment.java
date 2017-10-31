@@ -40,11 +40,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         albumList = new ArrayList<>();
 
-        TextView textViewTopBar = view.findViewById(R.id.textViewTopBar);
-        textViewTopBar.setText(R.string.topbar_home);
-        ImageView imageViewBack = view.findViewById(R.id.imageViewBack);
-        imageViewBack.setVisibility(View.GONE);
-
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_home);
         RecentListenedRecyclerViewAdapter.RecentListenedRecyclerViewAdapterInteface listener =
                 new RecentListenedRecyclerViewAdapter.RecentListenedRecyclerViewAdapterInteface() {

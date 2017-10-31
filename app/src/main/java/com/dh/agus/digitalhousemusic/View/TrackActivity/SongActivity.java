@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.View.AppActivity;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,8 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class SongActivity extends AppActivity {
-    static final String SONG_POSITION = "song_position";
-    static final String SONG_TRACKLIST= "song_tracklist";
+    public static final String SONG_POSITION = "song_position";
+    public static final String SONG_TRACKLIST= "song_tracklist";
     ViewPager viewPager;
 
     @Override
@@ -70,6 +71,7 @@ public class SongActivity extends AppActivity {
                     // Carga la imagen blureada al background
                     RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
                     ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
+                    //todo ojo
                     Glide.with(SongActivity.this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").apply(requestOptions).transition(withCrossFade()).into(backgroundImageView);
                 }
                 @Override

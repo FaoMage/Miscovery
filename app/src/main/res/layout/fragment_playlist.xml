@@ -16,8 +16,6 @@
         android:textColor="@color/colorLightGrey"
         android:background="@color/colorPrimaryDark"/>
 
-    <include layout="@layout/top_bar_layout"/>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_playlist_create"
         android:layout_width="wrap_content"

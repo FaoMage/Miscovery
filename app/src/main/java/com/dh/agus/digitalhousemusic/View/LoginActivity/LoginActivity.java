@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.View.AppActivity;
 import com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity;
 
 public class LoginActivity extends AppActivity {

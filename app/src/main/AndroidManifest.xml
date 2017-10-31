@@ -22,11 +22,11 @@
         <activity
             android:name=".View.MainActivity.MainActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".View.SongActivity"
-            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity"
+        <activity android:name=".View.TrackActivity.SongActivity"
+            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".View.LoginActivity"
-            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity"
+        <activity android:name=".View.LoginActivity.LoginActivity"
+            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>

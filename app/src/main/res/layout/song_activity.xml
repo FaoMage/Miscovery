@@ -144,7 +144,6 @@
 
         </FrameLayout>
 
-        <include layout="@layout/bottom_navigation"/>
     </RelativeLayout>
 </LinearLayout>
 

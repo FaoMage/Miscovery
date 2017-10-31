@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class Favoritos extends Album {
-    List<Track> trackList = new ArrayList<>();
+    private List<Track> trackList = new ArrayList<>();
 
     public Favoritos () {
         setTitle("Favoritos");
