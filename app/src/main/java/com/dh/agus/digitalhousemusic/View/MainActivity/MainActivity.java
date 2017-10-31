@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.MainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,29 +18,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
-import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.View.LoginActivity.LoginActivity;
+import com.dh.agus.digitalhousemusic.View.MainActivity.Home.HomeFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListFragment;
+import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecyclerViewAdapter;
+import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import android.support.v7.widget.Toolbar;
-
-import static com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer.retrofit;
-
 public class MainActivity extends AppActivity
-        implements RecyclerViewAdapter.RecyclerViewInterface, Callback<Album> {
+        implements SongListRecyclerViewAdapter.RecyclerViewInterface {
 
-    private static final String HOME = "HOME";
-    private static final String NOT_HOME = "NOT_HOME";
+    public static final String HOME = "HOME";
+    public static final String NOT_HOME = "NOT_HOME";
 
     public static final String KEY_EMAIL = "KEY_EMAIL";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
@@ -49,6 +45,10 @@ public class MainActivity extends AppActivity
     private String loggedEmail = null;
 
     private NavigationView navigationView;
+
+    private HomeFragment homeFragment;
+    private SongListFragment favoriteSongListFragment;
+    private PlaylistFragment playlistFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +59,10 @@ public class MainActivity extends AppActivity
         implementAppBar();
         implementActivityDrawer(R.id.drawer_mainActivity);
 
-        final serviceDeezer service = retrofit.create(serviceDeezer.class);
-        //Call<Album> response = service.getAlbum("302127");
-        Call<Album> response = service.getAlbum("5979050");
-        response.enqueue(this);
+        homeFragment = new HomeFragment();
+        favoriteSongListFragment =
+                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos(),SongListFragment.TYPE_FAVORITE);
+        playlistFragment = new PlaylistFragment();
 
         // Busco el DrawerLayout y NavigationView
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_mainActivity);
@@ -72,12 +72,6 @@ public class MainActivity extends AppActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.item_menuMainActivity_favoritos:
-                        SongListFragment songListFragment =
-                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
-                        changeFragment(songListFragment,NOT_HOME);
-                        break;
-
                     case R.id.item_menuMainActivity_login:
                         login(null);
                         break;
@@ -97,18 +91,14 @@ public class MainActivity extends AppActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_home:
-                        HomeFragment homeFragment = new HomeFragment();
-                        changeFragment(homeFragment,NOT_HOME);
+                        changeFragment(homeFragment,HOME);
                         break;
 
                     case R.id.menu_favorites:
-                        SongListFragment songListFragment =
-                                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos());
-                        changeFragment(songListFragment,NOT_HOME);
+                        changeFragment(favoriteSongListFragment,NOT_HOME);
                         break;
 
                     case R.id.menu_playlist:
-                        PlaylistFragment playlistFragment = new PlaylistFragment();
                         changeFragment(playlistFragment,NOT_HOME);
                         break;
                 }
@@ -116,6 +106,8 @@ public class MainActivity extends AppActivity
                 return false;
             }
         });
+        View view = bottomNavigationView.findViewById(R.id.menu_home);
+        view.performClick();
     }
 
     private Favoritos loadHardcodeFavoritos () {
@@ -152,39 +144,26 @@ public class MainActivity extends AppActivity
         return favoritos;
     }
 
-    @Override
-    public void onResponse(Call<Album> call, Response<Album> response) {
-        int code = response.code();
-        if (code == 200) {
-            // Saca el album del response
-            Album album = response.body();
-            setTitle(album.getTitle());
-
-            // Crea el nuevo Fragment y lo cambia
-            SongListFragment songListFragment =
-                    SongListFragment.SongListFragmentFactory(album);
-            changeFragment(songListFragment,HOME);
-        } else {
-            System.out.println("Error");
-        }
-    }
-
     // Cambia el fragment actual por el enviado por parametro
-    private void changeFragment (Fragment fragment, String tag) {
+    public void changeFragment (Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Busca el fragment actual
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);
-        // Si el Fragment es null o distinto al que quiero cargar
-        //todo mostrar solucion del bug a pedro
-        //if (loadedFragment == null || !loadedFragment.getClass().equals(fragment.getClass())) {
+        // Si el Fragment actual es null o distinto al que quiero cargar
         if (loadedFragment == null || !loadedFragment.equals(fragment)) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_mainActivity,fragment,tag);
-            // Si es el Fragment Home, lo agrega al backstack
-            if (loadedFragment != null && loadedFragment.getTag().equals(HOME)) {
-                fragmentTransaction.addToBackStack(null);
+            // Si el Fragment que quiero cargar es Home y ya hay un Home en backstack
+            if (tag.equals(HOME) && fragmentManager.getBackStackEntryCount() > 0) {
+                // Pone el que estaba en el backstack
+                fragmentManager.popBackStack();
+            } else {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_mainActivity, fragment, tag);
+                // Si el ultimo fragment cargado es el Home, lo agrega al backstack
+                if (loadedFragment != null && loadedFragment.getTag().equals(HOME)) {
+                    fragmentTransaction.addToBackStack(null);
+                }
+                fragmentTransaction.commit();
             }
-            fragmentTransaction.commit();
         }
     }
 
@@ -241,12 +220,6 @@ public class MainActivity extends AppActivity
             login.setVisible(true);
             logout.setVisible(false);
         }
-    }
-
-    // Override de Retrofit
-    @Override
-    public void onFailure(Call<Album> call, Throwable throwable) {
-        System.out.println("Error Fatal");
     }
 
     // Override de onclicks

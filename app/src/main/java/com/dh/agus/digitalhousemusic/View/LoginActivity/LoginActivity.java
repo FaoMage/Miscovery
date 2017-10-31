@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.LoginActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.R;
+import com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity;
 
 public class LoginActivity extends AppActivity {
 

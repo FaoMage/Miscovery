@@ -1,7 +1,8 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.MainActivity.SongLists;
 
 
 import android.os.Bundle;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,11 +29,20 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  */
 public class SongListFragment extends Fragment {
 
-    public static final String KEY_ALBUM = "KEY_ALBUM";
+    private static final String KEY_ALBUM = "KEY_ALBUM";
+    private static final String KEY_LIST_TYPE = "KEY_LIST_TYPE";
 
-    public static SongListFragment SongListFragmentFactory(Album album) {
+    public static final String TYPE_FAVORITE = "TYPE_FAVORITE";
+    public static final String TYPE_PLAYLIST = "TYPE_PLAYLIST";
+    public static final String TYPE_COMMON = "TYPE_COMMON";
+    //todo esta bien usado?
+    @StringDef({TYPE_COMMON,TYPE_FAVORITE,TYPE_PLAYLIST})
+    private @interface SongListType {}
+
+    public static SongListFragment SongListFragmentFactory(Album album, @SongListType String listType) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_ALBUM,album);
+        bundle.putString(KEY_LIST_TYPE,listType);
         SongListFragment songListFragment = new SongListFragment();
         songListFragment.setArguments(bundle);
         return songListFragment;
@@ -44,6 +54,7 @@ public class SongListFragment extends Fragment {
         // Se extrae del bundle el album
         Bundle bundle = getArguments();
         Album album = bundle.getParcelable(KEY_ALBUM);
+        String listType = bundle.getString(KEY_LIST_TYPE);
 
         // Se extrae del album los tracks
         DataTracksList dataTracksList = album.getTracks();
@@ -53,18 +64,18 @@ public class SongListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_song_list, container, false);
 
         // Se crea el RecyclerView.
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_MainActivity);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_songListFragment);
 
-        // RecyclerViewAdapter | getActivity pasa la información directamente a la actividad
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
-                songsList, (RecyclerViewAdapter.RecyclerViewInterface) getActivity());
+        // SongListRecyclerViewAdapter | getActivity pasa la información directamente a la actividad
+        SongListRecyclerViewAdapter songListRecyclerViewAdapter = new SongListRecyclerViewAdapter(getContext(),
+                songsList, (SongListRecyclerViewAdapter.RecyclerViewInterface) getActivity(), listType);
 
         // Se crea el layoutManager
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
 
         // Se setean el adapter y el layoutManager
-        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setAdapter(songListRecyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
         //Se agrega un background difuminado

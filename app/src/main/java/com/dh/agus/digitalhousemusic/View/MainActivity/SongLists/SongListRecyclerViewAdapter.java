@@ -1,4 +1,4 @@
-package com.dh.agus.digitalhousemusic.View;
+package com.dh.agus.digitalhousemusic.View.MainActivity.SongLists;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,31 +14,36 @@ import com.dh.agus.digitalhousemusic.R;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
     private List<Track> songsList;
     private RecyclerViewInterface listener;
+    private String listType;
 
-    public RecyclerViewAdapter (Context context, List<Track> songsList, RecyclerViewInterface listener) {
+    public SongListRecyclerViewAdapter(Context context, List<Track> songsList, RecyclerViewInterface listener, String listType) {
         this.context = context;
         this.songsList = songsList;
         this.listener = listener;
+        this.listType = listType;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.structure_recycler_item,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
+        View view = layoutInflater.inflate(R.layout.itemstructure_recycler_songlist,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Track track = songsList.get(position);
         holder.loadView(track.getTitle(), track.getArtist().getName());
+
+        if (listType.equals(SongListFragment.TYPE_FAVORITE) ||
+            listType.equals(SongListFragment.TYPE_PLAYLIST)) {
+            holder.itemView.setBackgroundResource(R.color.colorTransparent);
+        }
 
         holder.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override

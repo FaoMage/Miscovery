@@ -46,6 +46,7 @@ public class Album implements Parcelable {
     @SerializedName("type")
     @Expose
     private String type;
+    private Artist artist;
 
     protected Album(Parcel in) {
         id = in.readString();
@@ -60,6 +61,7 @@ public class Album implements Parcelable {
         tracklist = in.readString();
         tracks = in.readParcelable(DataTracksList.class.getClassLoader());
         type = in.readString();
+        artist = in.readParcelable(Artist.class.getClassLoader());
     }
 
     // Constructor agregado para crear Favoritos
@@ -179,6 +181,10 @@ public class Album implements Parcelable {
         this.type = type;
     }
 
+    public Artist getArtist() {
+        return artist;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -198,5 +204,6 @@ public class Album implements Parcelable {
         parcel.writeString(tracklist);
         parcel.writeParcelable(tracks, i);
         parcel.writeString(type);
+        parcel.writeParcelable(artist,i);
     }
 }
