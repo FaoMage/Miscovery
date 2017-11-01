@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
@@ -32,7 +33,6 @@ import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecycle
 import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppActivity
         implements SongListRecyclerViewAdapter.RecyclerViewInterface {
@@ -242,12 +242,11 @@ public class MainActivity extends AppActivity
     }
 
     @Override
-    public void songOnClick(Integer songPosition, List<Track> trackList) {
+    public void songOnClick(Integer songPosition, Album album) {
         Intent intent = new Intent(this, SongActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt(SongActivity.SONG_POSITION, songPosition);
-        ArrayList<Track> trackArrayList = (ArrayList<Track>) trackList;
-        bundle.putParcelableArrayList(SongActivity.SONG_TRACKLIST, trackArrayList);
+        bundle.putParcelable(SongActivity.SONG_ALBUM, album);
 
         intent.putExtras(bundle);
         startActivity(intent);

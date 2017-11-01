@@ -35,7 +35,6 @@ public class SongListFragment extends Fragment {
     public static final String TYPE_FAVORITE = "TYPE_FAVORITE";
     public static final String TYPE_PLAYLIST = "TYPE_PLAYLIST";
     public static final String TYPE_COMMON = "TYPE_COMMON";
-    //todo esta bien usado?
     @StringDef({TYPE_COMMON,TYPE_FAVORITE,TYPE_PLAYLIST})
     private @interface SongListType {}
 
@@ -56,10 +55,6 @@ public class SongListFragment extends Fragment {
         Album album = bundle.getParcelable(KEY_ALBUM);
         String listType = bundle.getString(KEY_LIST_TYPE);
 
-        // Se extrae del album los tracks
-        DataTracksList dataTracksList = album.getTracks();
-        List<Track> songsList = dataTracksList.getData();
-
         // Se infla la view
         View view = inflater.inflate(R.layout.fragment_song_list, container, false);
 
@@ -68,7 +63,7 @@ public class SongListFragment extends Fragment {
 
         // SongListRecyclerViewAdapter | getActivity pasa la información directamente a la actividad
         SongListRecyclerViewAdapter songListRecyclerViewAdapter = new SongListRecyclerViewAdapter(getContext(),
-                songsList, (SongListRecyclerViewAdapter.RecyclerViewInterface) getActivity(), listType);
+                album, (SongListRecyclerViewAdapter.RecyclerViewInterface) getActivity(), listType);
 
         // Se crea el layoutManager
         RecyclerView.LayoutManager layoutManager =

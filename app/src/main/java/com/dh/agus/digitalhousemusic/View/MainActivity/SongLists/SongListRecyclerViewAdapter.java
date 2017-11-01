@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 
@@ -17,13 +19,16 @@ import java.util.List;
 public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
+    private Album album;
     private List<Track> songsList;
     private RecyclerViewInterface listener;
     private String listType;
 
-    public SongListRecyclerViewAdapter(Context context, List<Track> songsList, RecyclerViewInterface listener, String listType) {
+    public SongListRecyclerViewAdapter(Context context, Album album, RecyclerViewInterface listener, String listType) {
         this.context = context;
-        this.songsList = songsList;
+        this.album = album;
+        DataTracksList dataTracksList = album.getTracks();
+        songsList = dataTracksList.getData();
         this.listener = listener;
         this.listType = listType;
     }
@@ -60,7 +65,7 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.songOnClick(position, songsList);
+                listener.songOnClick(position, album);
             }
         });
     }
@@ -96,6 +101,6 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
     public interface RecyclerViewInterface {
         void favoriteOnClick (View view);
         void menuOnClick (View view);
-        void songOnClick(Integer songPosition, List<Track> trackList);
+        void songOnClick(Integer songPosition, Album album);
     }
 }

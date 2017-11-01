@@ -13,12 +13,12 @@ import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 
 public class TrackFragment extends Fragment {
-    public static final String TRACK = "track";
+    public static final String COVER = "COVER";
 
-    public static TrackFragment trackFragmentFabric(Track track) {
+    public static TrackFragment trackFragmentFabric(String cover) {
         TrackFragment trackFragment = new TrackFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(TRACK, track);
+        bundle.putString(COVER, cover);
         trackFragment.setArguments(bundle);
 
         return trackFragment;
@@ -32,14 +32,12 @@ public class TrackFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_track, container, false);
 
         Bundle bundle = getArguments();
-        Track track = bundle.getParcelable(TRACK);
+        String cover = bundle.getString(COVER);
 
         // Carga la imagen del album principal
-        // TODO - ver porque no levanta el album
-        Album album = track.getAlbum();
-
         ImageView imageAlbum = (ImageView) view.findViewById(R.id.imageViewAlbumImage);
-        Glide.with(this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").into(imageAlbum);
+        //Glide.with(this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").into(imageAlbum);
+        Glide.with(this).load(cover).into(imageAlbum);
         return view;
     }
 
