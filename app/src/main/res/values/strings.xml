@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Miscovery</string>
 
+    <string name="facebook_app_id">1029464220528825</string>
+    <string name="fb_login_protocol_scheme">fb1029464220528825</string>
+
     <string name="menu_home">Home</string>>
     <string name="header_tittle_menu">enu</string>
     <string name="menu_favoritos">Favoritos</string>

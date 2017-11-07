@@ -31,6 +31,8 @@ import com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment
 import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecyclerViewAdapter;
 import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
+import com.facebook.CallbackManager;
+import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 
@@ -40,10 +42,10 @@ public class MainActivity extends AppActivity
     public static final String HOME = "HOME";
     public static final String NOT_HOME = "NOT_HOME";
 
-    public static final String KEY_EMAIL = "KEY_EMAIL";
+    public static final String KEY_USER = "KEY_USER";
     public static final String KEY_PASSWORD = "KEY_PASSWORD";
     private Boolean logged = false;
-    private String loggedEmail = null;
+    private String loggedUser = null;
 
     private NavigationView navigationView;
 
@@ -187,11 +189,13 @@ public class MainActivity extends AppActivity
                 data != null) {
 
             Bundle bundle = data.getExtras();
-            loggedEmail = bundle.getString(KEY_EMAIL);
+            loggedUser = bundle.getString(KEY_USER);
 
             // Seteo el email en el drawer
             TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
-            textView.setText(loggedEmail);
+            textView.setText(loggedUser);
+
+            Toast.makeText(this, "Bienvenido " + loggedUser, Toast.LENGTH_SHORT).show();
 
             changeLoginLogout();
 
@@ -202,9 +206,12 @@ public class MainActivity extends AppActivity
     // Metodo para logout
     private void logout () {
         logged = false;
-        loggedEmail = null;
+        loggedUser = null;
         TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
-        textView.setText(loggedEmail);
+        textView.setText(loggedUser);
+
+        LoginManager.getInstance().logOut();
+
         changeLoginLogout();
     }
 

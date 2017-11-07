@@ -3,23 +3,29 @@ package com.dh.agus.digitalhousemusic.View.LoginActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
 import com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AppActivity {
 
     public static final Integer REQUEST_LOGIN = 125;
     public static final String KEY_MESSAGE = "KEY_MESSAGE";
+
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,40 @@ public class LoginActivity extends AppActivity {
                         "Funcion: Recuperar password", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        //Facebook
+        callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button_facebook);
+        loginButton.setReadPermissions("email");
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Bundle bundle = new Bundle();
+
+                Profile profile = Profile.getCurrentProfile();
+                String user = profile.getName();
+
+                bundle.putString(MainActivity.KEY_USER,user);
+
+                intent.putExtras(bundle);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Toast.makeText(LoginActivity.this, "Se produjo un error.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private static boolean isValidEmail(String email) {
@@ -83,12 +123,18 @@ public class LoginActivity extends AppActivity {
             Intent intent = new Intent(this,MainActivity.class);
             Bundle bundle = new Bundle();
 
-            bundle.putString(MainActivity.KEY_EMAIL,editTextEmail.getText().toString());
+            bundle.putString(MainActivity.KEY_USER,editTextEmail.getText().toString());
             bundle.putString(MainActivity.KEY_PASSWORD,editTextPassword.getText().toString());
 
             intent.putExtras(bundle);
             setResult(Activity.RESULT_OK,intent);
             finish();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 }
