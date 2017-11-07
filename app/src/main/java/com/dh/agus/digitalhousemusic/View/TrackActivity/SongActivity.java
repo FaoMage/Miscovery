@@ -199,12 +199,9 @@ public class SongActivity extends AppActivity {
         }
     }
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         if (mMediaPlayer != null) {
             if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.stop();
@@ -212,6 +209,7 @@ public class SongActivity extends AppActivity {
             mMediaPlayer.release();
             mMediaPlayer = null;
         }
+        handler.removeCallbacks(runnable);
     }
 
     private void togglePlayPause() {
