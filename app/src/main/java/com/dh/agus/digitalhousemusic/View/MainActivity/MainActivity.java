@@ -94,15 +94,15 @@ public class MainActivity extends AppActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_home:
-                        changeFragment(homeFragment,HOME);
+                        changeFragment(homeFragment,HOME, "Miscovery");
                         break;
 
                     case R.id.menu_favorites:
-                        changeFragment(favoriteSongListFragment,NOT_HOME);
+                        changeFragment(favoriteSongListFragment, NOT_HOME, "Favoritos");
                         break;
 
                     case R.id.menu_playlist:
-                        changeFragment(playlistFragment,NOT_HOME);
+                        changeFragment(playlistFragment, NOT_HOME, "Playlist");
                         break;
                 }
 
@@ -148,7 +148,10 @@ public class MainActivity extends AppActivity
     }
 
     // Cambia el fragment actual por el enviado por parametro
-    public void changeFragment (Fragment fragment, String tag) {
+    public void changeFragment (Fragment fragment, String tag, String title) {
+        // Setear el title
+        setTitle(title);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Busca el fragment actual
         Fragment loadedFragment = fragmentManager.findFragmentById(R.id.frame_mainActivity);

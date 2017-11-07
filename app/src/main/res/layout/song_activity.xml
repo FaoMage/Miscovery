@@ -87,7 +87,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_alignLeft="@+id/textViewSeekBar"
                             android:theme="@style/SongTimeReference"
-                            android:text="0:46"/>
+                            android:text=""/>
 
                         <TextView
                             android:id="@+id/textViewProgressBarEnds"
@@ -97,7 +97,7 @@
                             android:layout_below="@+id/textViewSeekBar"
                             android:layout_alignRight="@+id/textViewSeekBar"
                             android:theme="@style/SongTimeReference"
-                            android:text="3:34"/>
+                            android:text=""/>
 
 
                     </RelativeLayout>

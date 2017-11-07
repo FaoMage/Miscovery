@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
                         MainActivity m = (MainActivity) getContext();
                         SongListFragment songListFragment =
                                 SongListFragment.SongListFragmentFactory(album,SongListFragment.TYPE_COMMON);
-                        m.changeFragment(songListFragment,MainActivity.NOT_HOME);
+                        m.changeFragment(songListFragment, MainActivity.NOT_HOME, album.getTitle());
                     }
                 };
         recentListenedRecyclerViewAdapter =
