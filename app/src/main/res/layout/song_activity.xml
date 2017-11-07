@@ -71,8 +71,8 @@
                             android:layout_below="@+id/textViewSongName"
                             android:theme="@style/SongName" />
 
-                        <ProgressBar
-                            android:id="@+id/textViewProgressBar"
+                        <SeekBar
+                            android:id="@+id/textViewSeekBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="@android:style/Widget.Holo.ProgressBar.Horizontal"
@@ -83,9 +83,9 @@
                             android:id="@+id/textViewProgressBarStarts"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_below="@+id/textViewProgressBar"
+                            android:layout_below="@+id/textViewSeekBar"
                             android:layout_marginTop="10dp"
-                            android:layout_alignLeft="@+id/textViewProgressBar"
+                            android:layout_alignLeft="@+id/textViewSeekBar"
                             android:theme="@style/SongTimeReference"
                             android:text="0:46"/>
 
@@ -94,8 +94,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginTop="10dp"
-                            android:layout_below="@+id/textViewProgressBar"
-                            android:layout_alignRight="@+id/textViewProgressBar"
+                            android:layout_below="@+id/textViewSeekBar"
+                            android:layout_alignRight="@+id/textViewSeekBar"
                             android:theme="@style/SongTimeReference"
                             android:text="3:34"/>
 
@@ -108,11 +108,11 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/imageViewPause"
+                            android:id="@+id/imageViewPlayerControl"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/ic_pause_black_24dp"
+                            android:src="@drawable/ic_play"
                             android:theme="@style/WhiteVector"
                             />
 
@@ -120,8 +120,8 @@
                             android:id="@+id/imageViewPrevious"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:layout_toLeftOf="@id/imageViewPause"
-                            android:layout_toStartOf="@id/imageViewPause"
+                            android:layout_toLeftOf="@id/imageViewPlayerControl"
+                            android:layout_toStartOf="@id/imageViewPlayerControl"
                             android:src="@drawable/ic_skip_previous_black_24dp"
                             android:theme="@style/WhiteVector"
                             />
@@ -130,8 +130,8 @@
                             android:id="@+id/imageViewNext"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:layout_toRightOf="@id/imageViewPause"
-                            android:layout_toEndOf="@id/imageViewPause"
+                            android:layout_toRightOf="@id/imageViewPlayerControl"
+                            android:layout_toEndOf="@id/imageViewPlayerControl"
                             android:src="@drawable/ic_skip_next_black_24dp"
                             android:theme="@style/WhiteVector"
                             />
