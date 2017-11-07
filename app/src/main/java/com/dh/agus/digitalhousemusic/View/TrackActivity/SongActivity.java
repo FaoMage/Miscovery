@@ -1,6 +1,9 @@
 package com.dh.agus.digitalhousemusic.View.TrackActivity;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -17,6 +20,7 @@ import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -27,6 +31,8 @@ public class SongActivity extends AppActivity {
     public static final String SONG_POSITION = "song_position";
     public static final String SONG_TRACKLIST= "song_tracklist";
     ViewPager viewPager;
+    private MediaPlayer mMediaPlayer;
+    private ImageView mPlayerControl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +49,24 @@ public class SongActivity extends AppActivity {
 
             setAppBarContext(SongActivity.this, this);
             implementAppBar();
+
+            mPlayerControl = (ImageView) findViewById(R.id.imageViewPlayerControl);
+
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    togglePlayPause();
+                }
+            });
+            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mPlayerControl.setImageResource(R.drawable.ic_play);
+                }
+            });
+
 
             viewPager = (ViewPager) findViewById(R.id.trackAlbumImageViewPager);
             TrackViewPagerAdapter adapter = new TrackViewPagerAdapter(getSupportFragmentManager(),
@@ -67,6 +91,18 @@ public class SongActivity extends AppActivity {
                     textViewAlbumName.setText("Toxicity");
 
                     setTitle("Toxicity");
+
+                    if (mMediaPlayer.isPlaying()) {
+                        mMediaPlayer.stop();
+                        mMediaPlayer.reset();
+                    }
+
+                    try {
+                        mMediaPlayer.setDataSource(track.getPreview());
+                        mMediaPlayer.prepareAsync();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                     // Carga la imagen blureada al background
                     RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
@@ -97,14 +133,35 @@ public class SongActivity extends AppActivity {
                 }
             });
 
-            ImageView imageViewPause = (ImageView) findViewById(R.id.imageViewPause);
-            imageViewPause.setOnClickListener(new View.OnClickListener() {
+            mPlayerControl.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Toast.makeText(SongActivity.this,
-                            "Pausa la cancion", Toast.LENGTH_SHORT).show();
+                public void onClick(View v) {
+                    togglePlayPause();
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mMediaPlayer != null) {
+            if (mMediaPlayer.isPlaying()) {
+                mMediaPlayer.stop();
+            }
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
+
+    private void togglePlayPause() {
+        if (mMediaPlayer.isPlaying()) {
+            mMediaPlayer.pause();
+            mPlayerControl.setImageResource(R.drawable.ic_play);
+        } else {
+            mMediaPlayer.start();
+            mPlayerControl.setImageResource(R.drawable.ic_pause);
         }
     }
 
