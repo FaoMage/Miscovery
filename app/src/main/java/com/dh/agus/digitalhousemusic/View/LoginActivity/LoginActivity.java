@@ -19,37 +19,43 @@ import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppActivity {
 
     public static final Integer REQUEST_LOGIN = 125;
     public static final String KEY_MESSAGE = "KEY_MESSAGE";
 
+    public static final String KEY_USER = "KEY_USER";
+
     private CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
+
         setAppBarContext(LoginActivity.this, this);
         implementAppBar();
+        setTitle(R.string.login_login_to_miscovery);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
-        setTitle(R.string.login_login_to_miscovery);
-
-        TextView textViewMessage = (TextView) findViewById(R.id.textViewLoginMessage);
-        textViewMessage.setText(bundle.getString(KEY_MESSAGE));
+        if (bundle != null) {
+            TextView textViewMessage = (TextView) findViewById(R.id.textViewLoginMessage);
+            textViewMessage.setText(bundle.getString(KEY_MESSAGE));
+        }
 
         // Se setea el ClickListener del boton para registrarse
         TextView textViewCreateAccount = (TextView) findViewById(R.id.textView_login_createAccount);
         textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this,
-                        "Funcion: Registro de cuenta nueva", Toast.LENGTH_SHORT).show();
+                Intent intentRegister = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivityForResult(intentRegister,RegisterActivity.REQUEST_REGISTER);
             }
         });
 
@@ -79,7 +85,7 @@ public class LoginActivity extends AppActivity {
                 Profile profile = Profile.getCurrentProfile();
                 String user = profile.getName();
 
-                bundle.putString(MainActivity.KEY_USER,user);
+                bundle.putString(LoginActivity.KEY_USER,user);
 
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK,intent);
@@ -93,48 +99,26 @@ public class LoginActivity extends AppActivity {
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(LoginActivity.this, "Se produjo un error.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Se produjo un error", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private static boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
+    // esto se va y se hace con firebase
     public void login (View view) {
-        Boolean inputEmailOk = false;
-        Boolean inputPasswordOk = false;
-        TextInputLayout textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayout_login_email);
-        TextInputLayout textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayout_login_password);
-        EditText editTextEmail = (EditText) findViewById(R.id.editText_login_email);
-        EditText editTextPassword = (EditText) findViewById(R.id.editText_login_password);
+        Intent intent = new Intent(this,MainActivity.class);
+        setResult(Activity.RESULT_OK,intent);
+        finish();
 
-        if (!isValidEmail(editTextEmail.getText().toString())) {
-            textInputLayoutEmail.setError("Ingrese un email valido.");
-        } else {
-            textInputLayoutEmail.setError(null);
-            inputEmailOk = true;
-        }
-
-        inputPasswordOk = true;
-
-        if (inputEmailOk && inputPasswordOk) {
-            Intent intent = new Intent(this,MainActivity.class);
-            Bundle bundle = new Bundle();
-
-            bundle.putString(MainActivity.KEY_USER,editTextEmail.getText().toString());
-            bundle.putString(MainActivity.KEY_PASSWORD,editTextPassword.getText().toString());
-
-            intent.putExtras(bundle);
-            setResult(Activity.RESULT_OK,intent);
-            finish();
-        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == RegisterActivity.REQUEST_REGISTER) {
+
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
