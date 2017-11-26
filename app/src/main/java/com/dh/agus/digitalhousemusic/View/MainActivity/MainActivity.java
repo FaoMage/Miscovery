@@ -33,6 +33,8 @@ import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecycle
 import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -42,8 +44,7 @@ public class MainActivity extends AppActivity
     public static final String HOME = "HOME";
     public static final String NOT_HOME = "NOT_HOME";
 
-    public static final String KEY_USER = "KEY_USER";
-    public static final String KEY_PASSWORD = "KEY_PASSWORD";
+    private FirebaseAuth mAuth;
     private Boolean logged = false;
     private String loggedUser = null;
 
@@ -111,6 +112,22 @@ public class MainActivity extends AppActivity
         });
         View view = bottomNavigationView.findViewById(R.id.menu_home);
         view.performClick();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            logged = true;
+            loggedUser = user.getEmail();
+
+            TextView textViewHeader = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_header_loggedEmail);
+            textViewHeader.setText(loggedUser);
+            changeLoginLogout();
+        }
     }
 
     private Favoritos loadHardcodeFavoritos () {
@@ -184,36 +201,15 @@ public class MainActivity extends AppActivity
         startActivityForResult(intent,LoginActivity.REQUEST_LOGIN);
     }
 
-    // Se ejecuta cuando termina el login
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == LoginActivity.REQUEST_LOGIN &&
-                resultCode == Activity.RESULT_OK &&
-                data != null) {
-
-            Bundle bundle = data.getExtras();
-            loggedUser = bundle.getString(KEY_USER);
-
-            // Seteo el email en el drawer
-            TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
-            textView.setText(loggedUser);
-
-            Toast.makeText(this, "Bienvenido " + loggedUser, Toast.LENGTH_SHORT).show();
-
-            changeLoginLogout();
-
-            logged = true;
-        }
-    }
-
     // Metodo para logout
     private void logout () {
         logged = false;
         loggedUser = null;
-        TextView textView = (TextView) findViewById(R.id.textView_header_loggedEmail);
-        textView.setText(loggedUser);
+        TextView textViewHeader = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_header_loggedEmail);
+        textViewHeader.setText(loggedUser);
 
         LoginManager.getInstance().logOut();
+        mAuth.signOut();
 
         changeLoginLogout();
     }

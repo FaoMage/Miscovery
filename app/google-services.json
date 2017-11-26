@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1035048879963",
+    "firebase_url": "https://miscovery-ea44e.firebaseio.com",
+    "project_id": "miscovery-ea44e",
+    "storage_bucket": "miscovery-ea44e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035048879963:android:da91349399b644c4",
+        "android_client_info": {
+          "package_name": "com.dh.agus.digitalhousemusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035048879963-unroe41e1glf7thandkgsign3nvrvv8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJhy7bNnpPewd32ohmRSV8bhq0V9UrqBY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

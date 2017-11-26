@@ -21,20 +21,33 @@
         </activity>
         <activity
             android:name=".View.MainActivity.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.TrackActivity.SongActivity"
-            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.LoginActivity.LoginActivity"
-            android:parentActivityName="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.TrackActivity.SongActivity"
+            android:parentActivityName=".View.MainActivity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.LoginActivity.LoginActivity"
+            android:parentActivityName=".View.MainActivity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.LoginActivity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".View.LoginActivity.LoginActivity"/>
+        <activity
+            android:name=".View.LoginActivity.RecoverPasswordActivity"
+            android:parentActivityName=".View.LoginActivity.LoginActivity"
+            android:screenOrientation="portrait" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
+
     </application>
+
 </manifest>
