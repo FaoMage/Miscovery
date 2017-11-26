@@ -30,6 +30,14 @@
             android:name=".View.LoginActivity.LoginActivity"
             android:parentActivityName=".View.MainActivity.MainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.LoginActivity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".View.LoginActivity.LoginActivity"/>
+        <activity
+            android:name=".View.LoginActivity.RecoverPasswordActivity"
+            android:parentActivityName=".View.LoginActivity.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -39,7 +47,7 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".View.LoginActivity.RegisterActivity"></activity>
+
     </application>
 
 </manifest>

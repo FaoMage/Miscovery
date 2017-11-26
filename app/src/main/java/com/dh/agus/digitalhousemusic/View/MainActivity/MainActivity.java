@@ -122,7 +122,7 @@ public class MainActivity extends AppActivity
 
         if (user != null) {
             logged = true;
-            loggedUser = user.getDisplayName();
+            loggedUser = user.getEmail();
 
             TextView textViewHeader = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_header_loggedEmail);
             textViewHeader.setText(loggedUser);
@@ -199,16 +199,6 @@ public class MainActivity extends AppActivity
         intent.putExtras(bundle);
         // Pide que se cree una actividad esperando un resultado
         startActivityForResult(intent,LoginActivity.REQUEST_LOGIN);
-    }
-
-    // Se ejecuta cuando termina el login
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == LoginActivity.REQUEST_LOGIN &&
-                resultCode == Activity.RESULT_OK &&
-                data != null) {
-            Toast.makeText(this, "Bienvenido " + loggedUser, Toast.LENGTH_SHORT).show();
-        }
     }
 
     // Metodo para logout

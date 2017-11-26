@@ -70,8 +70,9 @@
     <Button
         android:id="@+id/button_signUp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signup_signup"
+        android:layout_height="25dp"
+        android:text="@string/register_signup"
+        android:background="@drawable/login_button_model"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:onClick="register"/>

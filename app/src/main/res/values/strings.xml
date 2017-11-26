@@ -1,33 +1,52 @@
 <resources>
     <string name="app_name">Miscovery</string>
+    <string name="test">test test test</string>
 
     <string name="facebook_app_id">1029464220528825</string>
     <string name="fb_login_protocol_scheme">fb1029464220528825</string>
 
-    <string name="menu_home">Home</string>>
+    <string name="appbar_home">Inicio</string>
+    <string name="appbar_login_to_miscovery">Ingresar a Miscovery</string>
+    <string name="appbar_register">Registrarse a Miscovery</string>
+    <string name="appbar_recover">Recuperar contraseña</string>
+
     <string name="header_tittle_menu">enu</string>
+
+    <string name="menu_home">Home</string>>
     <string name="menu_favoritos">Favoritos</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_login">Login</string>
+    <string name="menu_playlist">Playlist</string>
 
     <string name="login_favorites_mensaje">Hola! Para agregar una cancion a favoritos debes loguearte, es simple!</string>
-    <string name="login_login_to_miscovery">Login to Miscovery</string>
     <string name="login_crear_cuenta"><u>¿No tienes cuenta?, ¡Crea una ahora!</u></string>
     <string name="login_olvide_contraseña"><u>Olvide mi contraseña</u></string>
     <string name="login_button_ingresar">ingresar</string>
     <string name="login_password">contraseña</string>
     <string name="login_password_r">repetir contraseña</string>
     <string name="login_email">email</string>
+    <string name="login_facebook_colition">El mail asociado a esta cuenta de facebook ya esta registrado. Intenta ingresar con ese mail!</string>
+    <string name="login_error">Ocurrió un error :( Intenta mas tarde</string>
+    <string name="login_emailalreadyregistered">Tu mail ya esta registrado!</string>
+    <string name="login_wrong_password">Contraseña incorrecta</string>
+    <string name="login_emailnotregistered">El email ingresado no esta registrado</string>
+    <string name="login_incomplete_field">Este campo no puede estar vacio</string>
+
+    <string name="register_signup">registrarse</string>
+    <string name="register_invalid_email">Ingrese un email valido</string>
+    <string name="register_password_format">La contraseña debe tener mas de 8 caracteres</string>
+    <string name="register_passwords_unequal">Las contraseñas deben ser iguales</string>
+    <string name="register_email_in_use">El mail se encuentra en uso</string>
+
+    <string name="recover_message">Parece que olvidaste tu contraseña :( \n\n Ingresa el email con el que te registraste y te enviaremos un mail donde podras recuperar tu contraseña.</string>
+    <string name="recover_invalid_mail">Mail enviado!</string>
+    <string name="recover_search_emails">Busca en tu casilla de correos para recobrar la contraseña.</string>
+
+    <string name="dialog_signup_loginin">Ingresando…</string>
+    <string name="dialog_processing_order">Procesando el pedido…</string>
+    <string name="dialog_registering_account">Registrando cuenta…</string>
+    <string name="recover_send_email">Enviar email</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="test">test test test</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="topbar_home">Inicio</string>
-    <string name="menu_playlist">Playlist</string>
-    <string name="signup_signup">registrarse</string>
-
 </resources>
