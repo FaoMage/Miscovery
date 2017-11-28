@@ -77,6 +77,19 @@ public class Track implements Parcelable {
     @Expose
     private String type;
 
+    private Boolean isFavorite = false;
+
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.isFavorite = favorite;
+    }
+
+    public Track() {
+    }
+
     protected Track(Parcel in) {
         id = in.readString();
         title = in.readString();
