@@ -107,8 +107,10 @@ public class Track implements Parcelable {
         type = in.readString();
     }
 
-    public Track(String title, Artist artist) {
+    public Track(String title, String id, Album album, Artist artist) {
         this.title = title;
+        this.album = album;
+        this.id = id;
         this.artist = artist;
     }
 

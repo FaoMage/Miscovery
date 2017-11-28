@@ -94,7 +94,11 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
 
         public void loadView (Track track, Album album) {
             textViewNameSong.setText(track.getTitle());
-            textViewArtistName.setText(album.getTitle());
+            if (listType.equals(SongListFragment.TYPE_FAVORITE)) {
+                textViewArtistName.setText(track.getArtist().getName());
+            } else {
+                textViewArtistName.setText(album.getArtist().getName());
+            }
             if (track.getFavorite()) {
                 imageViewFavorite.setImageResource(R.drawable.ic_favorite_accent_24dp);
             }

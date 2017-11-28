@@ -160,7 +160,7 @@ public class MainActivity extends AppActivity
     }
 
     // Metodo para login y override para obetener el resultado
-    private void login (@Nullable String message) {
+    public void login (@Nullable String message) {
         Intent intent = new Intent(this,LoginActivity.class);
         Bundle bundle = new Bundle();
         // Le pasa un mensaje para mostrar en el loginActivity
@@ -209,8 +209,9 @@ public class MainActivity extends AppActivity
             DatabaseReference reference = database.getReference().child(uId).child("favoritos");
             if (!track.getFavorite()) {
                 imageView.setImageResource(R.drawable.ic_favorite_accent_24dp);
-                FavoriteTrack favoriteTrack = new FavoriteTrack(track.getId(),
-                        track.getTitle(), album.getId(), album.getTitle());
+                FavoriteTrack favoriteTrack = new FavoriteTrack(track.getId(), track.getTitle(),
+                        album.getId(), album.getTitle(), album.getArtist().getId(),
+                        album.getArtist().getName());
                 reference.child(favoriteTrack.getTrackId()).setValue(favoriteTrack);
                 track.setFavorite(true);
             } else {

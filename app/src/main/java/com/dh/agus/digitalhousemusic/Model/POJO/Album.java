@@ -190,6 +190,10 @@ public class Album implements Parcelable {
         return 0;
     }
 
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
