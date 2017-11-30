@@ -1,6 +1,5 @@
 package com.dh.agus.digitalhousemusic.View.MainActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,25 +17,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dh.agus.digitalhousemusic.Controller.Controller;
+import com.dh.agus.digitalhousemusic.Model.DAO.DAOFirebase;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
-import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
-import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
-import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
 import com.dh.agus.digitalhousemusic.View.LoginActivity.LoginActivity;
+import com.dh.agus.digitalhousemusic.View.MainActivity.Favorites.FavoritesFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.Home.HomeFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment;
-import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecyclerViewAdapter;
 import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
-import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppActivity
         implements SongListRecyclerViewAdapter.RecyclerViewInterface {
@@ -51,7 +48,7 @@ public class MainActivity extends AppActivity
     private NavigationView navigationView;
 
     private HomeFragment homeFragment;
-    private SongListFragment favoriteSongListFragment;
+    private FavoritesFragment favoritesFragment;
     private PlaylistFragment playlistFragment;
 
     @Override
@@ -64,8 +61,7 @@ public class MainActivity extends AppActivity
         implementActivityDrawer(R.id.drawer_mainActivity);
 
         homeFragment = new HomeFragment();
-        favoriteSongListFragment =
-                SongListFragment.SongListFragmentFactory(loadHardcodeFavoritos(),SongListFragment.TYPE_FAVORITE);
+        favoritesFragment = new FavoritesFragment();
         playlistFragment = new PlaylistFragment();
 
         // Busco el DrawerLayout y NavigationView
@@ -99,7 +95,7 @@ public class MainActivity extends AppActivity
                         break;
 
                     case R.id.menu_favorites:
-                        changeFragment(favoriteSongListFragment, NOT_HOME, "Favoritos");
+                        changeFragment(favoritesFragment, NOT_HOME, "Favoritos");
                         break;
 
                     case R.id.menu_playlist:
@@ -130,40 +126,6 @@ public class MainActivity extends AppActivity
         }
     }
 
-    private Favoritos loadHardcodeFavoritos () {
-        Artist artist = new Artist("Fulano de tal");
-        DataTracksList dataTracksList = new DataTracksList();
-        Track track1 = new Track("Una Cancion de Favoritos",artist);
-        Track track2 = new Track("Una Cancion de Favoritos",artist);
-        Track track3 = new Track("Una Cancion de Favoritos",artist);
-        Track track4 = new Track("Una Cancion de Favoritos",artist);
-        Track track5 = new Track("Una Cancion de Favoritos",artist);
-        Track track6 = new Track("Una Cancion de Favoritos",artist);
-        Track track7 = new Track("Una Cancion de Favoritos",artist);
-        Track track8 = new Track("Una Cancion de Favoritos",artist);
-        Track track9 = new Track("Una Cancion de Favoritos",artist);
-        Track track10 = new Track("Una Cancion de Favoritos",artist);
-        Track track11 = new Track("Una Cancion de Favoritos",artist);
-        Track track12 = new Track("Una Cancion de Favoritos",artist);
-        ArrayList<Track> trackList = new ArrayList<>();
-        trackList.add(track1);
-        trackList.add(track2);
-        trackList.add(track3);
-        trackList.add(track4);
-        trackList.add(track5);
-        trackList.add(track6);
-        trackList.add(track7);
-        trackList.add(track8);
-        trackList.add(track9);
-        trackList.add(track10);
-        trackList.add(track11);
-        trackList.add(track12);
-        dataTracksList.setData(trackList);
-        Favoritos favoritos = new Favoritos();
-        favoritos.setDataTracksList(dataTracksList);
-        return favoritos;
-    }
-
     // Cambia el fragment actual por el enviado por parametro
     public void changeFragment (Fragment fragment, String tag, String title) {
         // Setear el title
@@ -191,7 +153,7 @@ public class MainActivity extends AppActivity
     }
 
     // Metodo para login y override para obetener el resultado
-    private void login (@Nullable String message) {
+    public void login (@Nullable String message) {
         Intent intent = new Intent(this,LoginActivity.class);
         Bundle bundle = new Bundle();
         // Le pasa un mensaje para mostrar en el loginActivity
@@ -211,6 +173,7 @@ public class MainActivity extends AppActivity
         LoginManager.getInstance().logOut();
         mAuth.signOut();
 
+        login("Esperamos que vuelvas pronto!");
         changeLoginLogout();
     }
 
@@ -220,7 +183,7 @@ public class MainActivity extends AppActivity
         MenuItem login = menu.findItem(R.id.item_menuMainActivity_login);
         MenuItem logout = menu.findItem(R.id.item_menuMainActivity_logout);
 
-        if (login.isVisible() && !logout.isVisible()) {
+        if (loggedUser != null) {
             login.setVisible(false);
             logout.setVisible(true);
         } else {
@@ -231,11 +194,23 @@ public class MainActivity extends AppActivity
 
     // Override de onclicks
     @Override
-    public void favoriteOnClick(View view) {
+    public void favoriteOnClick(View view, Track track, Album album) {
         if (logged) {
-            // Si esta logueado, cambia el corazon a agregado
+            // Si esta logueado
             ImageView imageView = view.findViewById(R.id.imageViewFavorite);
-            imageView.setImageResource(R.drawable.ic_favorite_accent_24dp);
+            Controller controller = new Controller();
+            if (!track.getFavorite()) {
+                imageView.setImageResource(R.drawable.ic_favorite_accent_24dp);
+                track.setFavorite(true);
+                album.setDataTracksList(null);
+                track.setAlbum(album);
+                controller.addFavorite(track);
+            } else {
+                imageView.setImageResource(R.drawable.ic_favorite_border_accent_24dp);
+                track.setFavorite(false);
+                controller.removeFavorite(track);
+            }
+
         } else {
             // Si no, le pide que se loguee
             login(this.getString(R.string.login_favorites_mensaje));

@@ -43,7 +43,7 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Track track = songsList.get(position);
-        holder.loadView(track.getTitle(), track.getArtist().getName());
+        holder.loadView(track,album);
 
         if (listType.equals(SongListFragment.TYPE_FAVORITE) ||
             listType.equals(SongListFragment.TYPE_PLAYLIST)) {
@@ -53,7 +53,7 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
         holder.imageViewFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.favoriteOnClick(view);
+                listener.favoriteOnClick(view, track, album);
             }
         });
         holder.imageViewMenu.setOnClickListener(new View.OnClickListener() {
@@ -92,14 +92,21 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
             this.imageViewMenu = itemView.findViewById(R.id.imageViewMenu);
         }
 
-        public void loadView (String songName, String artistName) {
-            textViewNameSong.setText(songName);
-            textViewArtistName.setText(artistName);
+        public void loadView (Track track, Album album) {
+            textViewNameSong.setText(track.getTitle());
+            if (listType.equals(SongListFragment.TYPE_FAVORITE)) {
+                textViewArtistName.setText(track.getArtist().getName());
+            } else {
+                textViewArtistName.setText(album.getArtist().getName());
+            }
+            if (track.getFavorite()) {
+                imageViewFavorite.setImageResource(R.drawable.ic_favorite_accent_24dp);
+            }
         }
     }
 
     public interface RecyclerViewInterface {
-        void favoriteOnClick (View view);
+        void favoriteOnClick (View view, Track track, Album album);
         void menuOnClick (View view);
         void songOnClick(Integer songPosition, Album album);
     }

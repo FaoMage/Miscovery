@@ -1,6 +1,7 @@
 package com.dh.agus.digitalhousemusic.Model.DAO;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 
 import retrofit2.Call;
@@ -24,5 +25,10 @@ public class DAODeezer {
     public void getAlbum (String albumId, Callback<Album> controllerCallback) {
         Call<Album> response = service.getAlbum(albumId);
         response.enqueue(controllerCallback);
+    }
+
+    public void gerTrack (String trackId, Callback<Track> trackCallback) {
+        Call<Track> response = service.getTrack(trackId);
+        response.enqueue(trackCallback);
     }
 }

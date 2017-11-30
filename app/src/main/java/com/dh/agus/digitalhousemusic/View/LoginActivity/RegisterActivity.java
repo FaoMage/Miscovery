@@ -15,6 +15,7 @@ import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -86,6 +87,7 @@ public class RegisterActivity extends AppActivity {
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
                             if (task.isSuccessful()) {
                                 Intent intent = new Intent(RegisterActivity.this,
                                         LoginActivity.class);
@@ -93,8 +95,9 @@ public class RegisterActivity extends AppActivity {
                                 finish();
                             } else {
                                 if (task.getException().getClass() == FirebaseAuthUserCollisionException.class) {
-                                    progressDialog.dismiss();
                                     textInputLayoutEmail.setError(getString(R.string.register_email_in_use));
+                                } else if (task.getException().getClass() == FirebaseNetworkException.class) {
+                                    LoginActivity.connectionErrorDialogShow(RegisterActivity.this);
                                 } else {
                                     Toast.makeText(RegisterActivity.this,
                                             R.string.login_error,

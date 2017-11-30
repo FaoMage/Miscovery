@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.R;
 
@@ -74,7 +75,8 @@ public class RecentListenedRecyclerViewAdapter
         }
 
         public void loadView (Album album) {
-            Glide.with(context).load(album.getCoverMedium()).into(imageViewBackground);
+            RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.placeholder);
+            Glide.with(context).load(album.getCoverMedium()).apply(requestOptions).into(imageViewBackground);
             textViewAlbum.setText(album.getTitle());
             textViewArtist.setText(album.getArtist().getName());
         }
