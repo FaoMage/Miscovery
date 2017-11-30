@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,8 +120,7 @@ public class SongActivity extends AppActivity {
                     textViewSongName.setText(track.getTitle());
 
                     TextView textViewAlbumName = (TextView) findViewById(R.id.textViewSongAlbumName);
-                    //todo esto va a traer un problema despues
-                    textViewAlbumName.setText(album.getTitle());
+                    textViewAlbumName.setText(track.getArtist().getName());
                     setTitle(album.getTitle());
 
                     mMediaPlayer.stop();
@@ -165,8 +165,14 @@ public class SongActivity extends AppActivity {
             });
 
             // Carga la imagen blureada al background
-            RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
+            RequestOptions requestOptions = new RequestOptions()
+                    .bitmapTransform(new BlurTransformation(15));
             ImageView backgroundImageView = (ImageView) findViewById(R.id.imageViewBackground);
+            LinearLayout linearLayout = findViewById(R.id.linealLayout_song);
+
+            if (album.getTitle().equals("Favoritos")){
+              linearLayout.setBackgroundResource(R.color.colorTransparent);
+            }
             Glide.with(SongActivity.this).load(album.getCoverMedium()).apply(requestOptions).transition(withCrossFade()).into(backgroundImageView);
         }
     }

@@ -4,21 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.Favorites.FavoritesFragment">
 
-    <FrameLayout
-        android:id="@+id/frame_favorites"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/progessBar_favorites"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+        <FrameLayout
+            android:id="@+id/frame_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
+            <ProgressBar
+                android:id="@+id/progessBar_favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
+            <TextView
+                android:id="@+id/textView_favorites_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parece que aún no tienes favoritos"
+                android:textColor="@color/colorLightGrey"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
+        </FrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

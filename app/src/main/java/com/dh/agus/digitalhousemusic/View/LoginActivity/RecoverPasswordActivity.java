@@ -16,6 +16,8 @@ import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
@@ -52,6 +54,7 @@ public class RecoverPasswordActivity extends AppActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     progressDialog.dismiss();
+                    Log.d("--------",task.getException().getMessage());
                     if (task.isSuccessful()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(RecoverPasswordActivity.this);
                         AlertDialog dialog = builder.setMessage(R.string.login_facebook_colition)
@@ -67,6 +70,8 @@ public class RecoverPasswordActivity extends AppActivity {
                         dialog.show();
                     } else if (task.getException().getClass() == FirebaseAuthInvalidUserException.class) {
                         textInputLayoutEmail.setError(getString(R.string.login_emailnotregistered));
+                    } else if (task.getException().getMessage().equals("An internal error has occurred. [ <<Network Error>> ]")) {
+                        LoginActivity.connectionErrorDialogShow(RecoverPasswordActivity.this);
                     }
                 }
             });

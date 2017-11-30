@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
@@ -36,8 +37,8 @@ public class TrackFragment extends Fragment {
 
         // Carga la imagen del album principal
         ImageView imageAlbum = (ImageView) view.findViewById(R.id.imageViewAlbumImage);
-        //Glide.with(this).load("https://e-cdns-images.dzcdn.net/images/cover/396027cb1a5886a50e97be30ac819e3d/250x250-000000-80-0-0.jpg").into(imageAlbum);
-        Glide.with(this).load(cover).into(imageAlbum);
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.placeholder);
+        Glide.with(this).load(cover).apply(requestOptions).into(imageAlbum);
         return view;
     }
 

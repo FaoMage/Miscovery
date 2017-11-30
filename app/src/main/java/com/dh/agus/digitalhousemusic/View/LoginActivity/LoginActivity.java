@@ -2,6 +2,7 @@ package com.dh.agus.digitalhousemusic.View.LoginActivity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -108,6 +110,7 @@ public class LoginActivity extends AppActivity {
                 Toast.makeText(LoginActivity.this,
                         R.string.login_error,
                         Toast.LENGTH_SHORT).show();
+                Log.d("------",exception.toString());
             }
         });
     }
@@ -157,19 +160,27 @@ public class LoginActivity extends AppActivity {
         textInputLayoutPassword.setError(null);
 
         if (user.length() > 0 && pw.length() > 0) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Ingresando...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             mAuth.signInWithEmailAndPassword(user, pw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        progressDialog.dismiss();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     } else {
                         Log.d("-------",task.getException().toString());
+                        progressDialog.dismiss();
                         if (task.getException().getClass() == FirebaseAuthInvalidCredentialsException.class) {
                             textInputLayoutPassword.setError(getString(R.string.login_wrong_password));
                         } else if (task.getException().getClass() == FirebaseAuthInvalidUserException.class){
                             textInputLayoutEmail.setError(getString(R.string.login_emailnotregistered));
+                        } else if (task.getException().getClass() == FirebaseNetworkException.class) {
+                            connectionErrorDialogShow(LoginActivity.this);
                         }
                     }
                 }
@@ -178,6 +189,20 @@ public class LoginActivity extends AppActivity {
             if (user.length() == 0) textInputLayoutEmail.setError(getString(R.string.login_incomplete_field));
             if (pw.length() == 0) textInputLayoutPassword.setError(getString(R.string.login_incomplete_field));
         }
+    }
+
+    protected static void connectionErrorDialogShow (Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog dialog = builder.setMessage(R.string.login_nointernet_message)
+                .setTitle(R.string.login_nointernet_title)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .create();
+        dialog.show();
     }
 
     @Override

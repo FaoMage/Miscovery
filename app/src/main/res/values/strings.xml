@@ -18,7 +18,7 @@
     <string name="menu_login">Login</string>
     <string name="menu_playlist">Playlist</string>
 
-    <string name="login_favorites_mensaje">Hola! Para agregar una cancion a favoritos debes loguearte, es simple!</string>
+    <string name="login_favorites_mensaje">Hola! Para agregar una cancion a favoriteAlbum debes loguearte, es simple!</string>
     <string name="login_crear_cuenta"><u>¿No tienes cuenta?, ¡Crea una ahora!</u></string>
     <string name="login_olvide_contraseña"><u>Olvide mi contraseña</u></string>
     <string name="login_button_ingresar">ingresar</string>
@@ -31,6 +31,8 @@
     <string name="login_wrong_password">Contraseña incorrecta</string>
     <string name="login_emailnotregistered">El email ingresado no esta registrado</string>
     <string name="login_incomplete_field">Este campo no puede estar vacio</string>
+    <string name="login_nointernet_message">Por favor, corrobora tu conexión a internet.</string>
+    <string name="login_nointernet_title">No hay internet :(</string>
 
     <string name="register_signup">registrarse</string>
     <string name="register_invalid_email">Ingrese un email valido</string>
@@ -52,4 +54,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

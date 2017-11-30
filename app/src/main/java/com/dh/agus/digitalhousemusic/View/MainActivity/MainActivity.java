@@ -1,6 +1,5 @@
 package com.dh.agus.digitalhousemusic.View.MainActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,11 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dh.agus.digitalhousemusic.Controller.Controller;
+import com.dh.agus.digitalhousemusic.Model.DAO.DAOFirebase;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
-import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
-import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
-import com.dh.agus.digitalhousemusic.Model.POJO.FavoriteTrack;
-import com.dh.agus.digitalhousemusic.Model.POJO.Favoritos;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 import com.dh.agus.digitalhousemusic.View.AppActivity;
@@ -30,17 +27,13 @@ import com.dh.agus.digitalhousemusic.View.LoginActivity.LoginActivity;
 import com.dh.agus.digitalhousemusic.View.MainActivity.Favorites.FavoritesFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.Home.HomeFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.PlayList.PlaylistFragment;
-import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListFragment;
 import com.dh.agus.digitalhousemusic.View.MainActivity.SongLists.SongListRecyclerViewAdapter;
 import com.dh.agus.digitalhousemusic.View.TrackActivity.SongActivity;
-import com.facebook.CallbackManager;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppActivity
         implements SongListRecyclerViewAdapter.RecyclerViewInterface {
@@ -180,6 +173,7 @@ public class MainActivity extends AppActivity
         LoginManager.getInstance().logOut();
         mAuth.signOut();
 
+        login("Esperamos que vuelvas pronto!");
         changeLoginLogout();
     }
 
@@ -189,7 +183,7 @@ public class MainActivity extends AppActivity
         MenuItem login = menu.findItem(R.id.item_menuMainActivity_login);
         MenuItem logout = menu.findItem(R.id.item_menuMainActivity_logout);
 
-        if (login.isVisible() && !logout.isVisible()) {
+        if (loggedUser != null) {
             login.setVisible(false);
             logout.setVisible(true);
         } else {
@@ -202,22 +196,19 @@ public class MainActivity extends AppActivity
     @Override
     public void favoriteOnClick(View view, Track track, Album album) {
         if (logged) {
-            // Si esta logueado, cambia el corazon a agregado
+            // Si esta logueado
             ImageView imageView = view.findViewById(R.id.imageViewFavorite);
-            String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference reference = database.getReference().child(uId).child("favoritos");
+            Controller controller = new Controller();
             if (!track.getFavorite()) {
                 imageView.setImageResource(R.drawable.ic_favorite_accent_24dp);
-                FavoriteTrack favoriteTrack = new FavoriteTrack(track.getId(), track.getTitle(),
-                        album.getId(), album.getTitle(), album.getArtist().getId(),
-                        album.getArtist().getName());
-                reference.child(favoriteTrack.getTrackId()).setValue(favoriteTrack);
                 track.setFavorite(true);
+                album.setDataTracksList(null);
+                track.setAlbum(album);
+                controller.addFavorite(track);
             } else {
                 imageView.setImageResource(R.drawable.ic_favorite_border_accent_24dp);
-                reference.child(track.getId()).removeValue();
                 track.setFavorite(false);
+                controller.removeFavorite(track);
             }
 
         } else {

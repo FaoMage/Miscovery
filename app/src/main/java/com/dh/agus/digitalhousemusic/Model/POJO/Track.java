@@ -104,6 +104,7 @@ public class Track implements Parcelable {
         preview = in.readString();
         availableCountries = in.createStringArrayList();
         album = in.readParcelable(Album.class.getClassLoader());
+        artist = in.readParcelable(Artist.class.getClassLoader());
         type = in.readString();
     }
 
@@ -325,6 +326,7 @@ public class Track implements Parcelable {
         parcel.writeString(preview);
         parcel.writeStringList(availableCountries);
         parcel.writeParcelable(album, i);
+        parcel.writeParcelable(artist, i);
         parcel.writeString(type);
     }
 }

@@ -45,6 +45,9 @@ public class Artist implements Parcelable{
     @Expose
     private String type;
 
+    public Artist() {
+    }
+
     public Artist(String id, String name) {
         this.name = name;
         this.id = id;

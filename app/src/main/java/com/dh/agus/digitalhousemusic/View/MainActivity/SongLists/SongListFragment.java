@@ -74,10 +74,13 @@ public class SongListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         //Se agrega un background difuminado
-        ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
-        RequestOptions requestOptions = new RequestOptions().bitmapTransform(new BlurTransformation(15));
-        Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
-
+        if (!listType.equals(TYPE_FAVORITE) && !listType.equals(TYPE_PLAYLIST)) {
+            ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
+            RequestOptions requestOptions = new RequestOptions()
+                    .bitmapTransform(new BlurTransformation(15))
+                    .placeholder(R.drawable.placeholder);
+            Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
+        }
         return view;
     }
 }
