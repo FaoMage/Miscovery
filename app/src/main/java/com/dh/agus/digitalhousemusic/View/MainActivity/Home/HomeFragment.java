@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.dh.agus.digitalhousemusic.Controller.Controller;
 import com.dh.agus.digitalhousemusic.Model.DAO.ResultListener;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 import com.dh.agus.digitalhousemusic.R;
@@ -35,7 +38,9 @@ public class HomeFragment extends Fragment {
 
     private List<Album> albumList;
     private List<Genre> genreList;
+    private List<Artist> artistsList;
     private GenresRecyclerAdapter genresRecyclerAdapter;
+    Controller controller = new Controller();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,22 +49,22 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         albumList = new ArrayList<>();
         genreList = new ArrayList<>();
+        artistsList = new ArrayList<>();
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_home);
-        /*RecentListenedRecyclerViewAdapter.RecentListenedRecyclerViewAdapterInteface listener =
-                new RecentListenedRecyclerViewAdapter.RecentListenedRecyclerViewAdapterInteface() {
+        GenresRecyclerAdapter.RecyclerViewInterface listener =
+                new GenresRecyclerAdapter.RecyclerViewInterface() {
                     @Override
-                    public void onClickAlbum(Album album) {
-                        MainActivity m = (MainActivity) getContext();
-                        SongListFragment songListFragment =
-                                SongListFragment.SongListFragmentFactory(album,SongListFragment.TYPE_COMMON);
-                        m.changeFragment(songListFragment, MainActivity.NOT_HOME, album.getTitle());
+                    public void genreOnClick(Integer genrePosition, Genre genre) {
+                        getAlbums(genre);
                     }
-                };*/
+                };
+
+
         genresRecyclerAdapter =
-                new GenresRecyclerAdapter(getContext(), genreList);
+                new GenresRecyclerAdapter(getContext(), genreList, listener);
         LinearLayoutManager gridLayoutManager =
-                new GridLayoutManager(getContext(),2, LinearLayoutManager.HORIZONTAL,false);
+                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setAdapter(genresRecyclerAdapter);
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -76,6 +81,36 @@ public class HomeFragment extends Fragment {
                 genreList.addAll(result.getData());
                 genresRecyclerAdapter.updateList(genreList);
                 genresRecyclerAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void getAlbums(Genre genre) {
+        controller.getGenderArtists(genre.getId().toString(), new ResultListener<Artists>() {
+            @Override
+            public void finish(Artists result) {
+                List<Artist> artists = result.getData();
+                Log.d("Results ->>>>>>>", "finish: " + artists);
+                if (artists.size() > 0) {
+                    artistsList.addAll(artists);
+                }
+                Log.d("Results ->>>>>>>", "finish: " + artistsList);
+                for (Artist x : artistsList) {
+                    controller.getArtistsAlbums(x.getId(), new ResultListener<Albums>() {
+                        @Override
+                        public void finish(Albums result) {
+                            List<Album> albums = result.getData();
+                            Log.d("Results ->>>>>>>", "ALBUMS: " + albums);
+
+                            if (albums!=null) {
+                                albumList.addAll(albums);
+                            }
+                            Log.d("Albums Results ->>>>>>>", "finish: " + albumList);
+                            //genresRecyclerAdapter.updateList(genreList);
+                            //genresRecyclerAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
             }
         });
     }

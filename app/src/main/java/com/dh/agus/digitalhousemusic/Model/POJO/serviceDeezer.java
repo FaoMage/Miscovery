@@ -1,5 +1,7 @@
 package com.dh.agus.digitalhousemusic.Model.POJO;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,6 +21,12 @@ public interface serviceDeezer {
 
     @GET("genre/{id}")
     Call<Genre> getGenre(@Path("id") String id);
+
+    @GET("genre/{id}/artists")
+    Call<Artists> getGenreArtists(@Path("id") String id);
+
+    @GET("artist/{id}/albums")
+    Call<Albums> getArtistsAlbums(@Path("id") String id);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://api.deezer.com/")

@@ -20,10 +20,12 @@ import java.util.List;
 public class GenresRecyclerAdapter extends RecyclerView.Adapter<GenresRecyclerAdapter.MyItemHolder> {
     private Context context;
     private List<Genre> data = new ArrayList<>();
+    private RecyclerViewInterface listener;
 
-    public GenresRecyclerAdapter(Context context, List<Genre> data) {
+    public GenresRecyclerAdapter(Context context, List<Genre> data, RecyclerViewInterface listener) {
         this.context = context;
         this.data = data;
+        this.listener = listener;
     }
 
 
@@ -39,11 +41,18 @@ public class GenresRecyclerAdapter extends RecyclerView.Adapter<GenresRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(MyItemHolder holder, int position) {
+    public void onBindViewHolder(MyItemHolder holder, final int position) {
         final Genre genre = data.get(position);
 
         // SETEO EL DATO EN EL VIEWHOLDER
         holder.loadGenre(genre);
+
+        holder.mImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.genreOnClick(position, genre);
+            }
+        });
     }
 
     @Override
@@ -74,4 +83,9 @@ public class GenresRecyclerAdapter extends RecyclerView.Adapter<GenresRecyclerAd
 
         }
     }
+
+    public interface RecyclerViewInterface {
+        void genreOnClick(Integer genrePosition, Genre genre);
+    }
+
 }

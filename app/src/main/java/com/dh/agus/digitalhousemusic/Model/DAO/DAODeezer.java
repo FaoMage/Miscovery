@@ -1,9 +1,14 @@
 package com.dh.agus.digitalhousemusic.Model.DAO;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +26,16 @@ public class DAODeezer {
 
     public DAODeezer() {
         service = retrofit.create(serviceDeezer.class);
+    }
+
+    public void getArtistsAlbums (String artistId, Callback<Albums> controllerCallback) {
+        Call<Albums> response = service.getArtistsAlbums(artistId);
+        response.enqueue(controllerCallback);
+    }
+
+    public void getGenreArtists (String genreId, Callback<Artists> controllerCallback) {
+        Call<Artists> response = service.getGenreArtists(genreId);
+        response.enqueue(controllerCallback);
     }
 
     public void getGenre (String genreId, Callback<Genre> controllerCallback) {

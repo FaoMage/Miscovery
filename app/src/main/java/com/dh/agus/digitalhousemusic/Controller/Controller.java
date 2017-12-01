@@ -3,8 +3,13 @@ package com.dh.agus.digitalhousemusic.Controller;
 import com.dh.agus.digitalhousemusic.Model.DAO.DAODeezer;
 import com.dh.agus.digitalhousemusic.Model.DAO.ResultListener;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
+import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
+import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,17 +35,32 @@ public class Controller {
         });
     }
 
-    public void getGenderArtists (String genderId, final ResultListener<Genre> viewListener) {
+    public void getArtistsAlbums (String artistId, final ResultListener<Albums> viewListener) {
         DAODeezer daoDeezer = new DAODeezer();
-        daoDeezer.getGenre(genderId, new Callback<Genre>() {
+        daoDeezer.getArtistsAlbums(artistId, new Callback<Albums>() {
             @Override
-            public void onResponse(Call<Genre> call, Response<Genre> response) {
+            public void onResponse(Call<Albums> call, Response<Albums> response) {
                 viewListener.finish(response.body());
             }
 
             @Override
-            public void onFailure(Call<Genre> call, Throwable throwable) {
-                throwable.printStackTrace();
+            public void onFailure(Call<Albums> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getGenderArtists (String genderId, final ResultListener<Artists> viewListener) {
+        DAODeezer daoDeezer = new DAODeezer();
+        daoDeezer.getGenreArtists(genderId, new Callback<Artists>() {
+            @Override
+            public void onResponse(Call<Artists> call, Response<Artists> response) {
+                viewListener.finish(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Artists> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }
