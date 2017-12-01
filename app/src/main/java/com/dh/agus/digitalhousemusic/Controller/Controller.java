@@ -1,11 +1,14 @@
 package com.dh.agus.digitalhousemusic.Controller;
 
+import android.util.Log;
+
 import com.dh.agus.digitalhousemusic.Model.DAO.DAODeezer;
 import com.dh.agus.digitalhousemusic.Model.DAO.ResultListener;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
+import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 
@@ -79,4 +82,22 @@ public class Controller {
             }
         });
     }
+
+    public void getTrackList (final String albumId, final ResultListener<DataTracksList> viewListener){
+        DAODeezer daoDeezer = new DAODeezer();
+        daoDeezer.getDataTracksList(albumId, new Callback<DataTracksList>() {
+            @Override
+            public void onResponse(Call<DataTracksList> call, Response<DataTracksList> response) {
+                Log.d("albumID", "onResponse: " + albumId);
+                viewListener.finish(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<DataTracksList> call, Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+
 }

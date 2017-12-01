@@ -28,6 +28,9 @@ public interface serviceDeezer {
     @GET("artist/{id}/albums")
     Call<Albums> getArtistsAlbums(@Path("id") String id);
 
+    @GET("album/{id}/tracks/?limit=10")
+    Call<DataTracksList> getDataTracksList(@Path("id") String id);
+
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://api.deezer.com/")
             .addConverterFactory(GsonConverterFactory.create())

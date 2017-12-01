@@ -4,6 +4,7 @@ import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
+import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
@@ -45,6 +46,11 @@ public class DAODeezer {
 
     public void getAlbum (String albumId, Callback<Album> controllerCallback) {
         Call<Album> response = service.getAlbum(albumId);
+        response.enqueue(controllerCallback);
+    }
+
+    public void getDataTracksList (String albumId, Callback<DataTracksList> controllerCallback) {
+        Call<DataTracksList> response = service.getDataTracksList(albumId);
         response.enqueue(controllerCallback);
     }
 
