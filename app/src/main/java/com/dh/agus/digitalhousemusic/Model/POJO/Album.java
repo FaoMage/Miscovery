@@ -64,7 +64,7 @@ public class Album implements Parcelable {
         artist = in.readParcelable(Artist.class.getClassLoader());
     }
 
-    // Constructor agregado para crear Favoritos
+    // Constructor agregado para crear FavoriteAlbum
     public Album () {}
 
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -190,6 +190,10 @@ public class Album implements Parcelable {
         return 0;
     }
 
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(id);
@@ -205,5 +209,15 @@ public class Album implements Parcelable {
         parcel.writeParcelable(tracks, i);
         parcel.writeString(type);
         parcel.writeParcelable(artist,i);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Album) {
+            Album album = (Album) obj;
+            return this.getId().equals(((Album) obj).getId());
+        } else {
+            return false;
+        }
     }
 }

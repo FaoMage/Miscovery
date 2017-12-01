@@ -9,10 +9,10 @@ import java.util.List;
  * Created by ZetaxMage on 04/10/2017.
  */
 
-public class Favoritos extends Album {
+public class FavoriteAlbum extends Album {
     private List<Track> trackList = new ArrayList<>();
 
-    public Favoritos () {
+    public FavoriteAlbum() {
         setTitle("Favoritos");
     }
 

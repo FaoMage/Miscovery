@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
 
                                 MainActivity m = (MainActivity) getContext();
                                 SongListFragment songListFragment =
-                                        SongListFragment.SongListFragmentFactory(album,SongListFragment.TYPE_COMMON);
+                                        SongListFragment.SongListFragmentFactory(album, SongListFragment.TYPE_COMMON);
                                 m.changeFragment(songListFragment, MainActivity.NOT_HOME, album.getTitle());
 
                             }
@@ -130,11 +130,14 @@ public class HomeFragment extends Fragment {
                 List<Artist> artists = result.getData();
                 if (artists!=null) {
                     artistsList.addAll(artists);
-                    for (Artist x : artistsList) {
+                    for (final Artist x : artistsList) {
                         controller.getArtistsAlbums(x.getId(), new ResultListener<Albums>() {
                             @Override
                             public void finish(Albums result) {
                                 List<Album> albums = result.getData();
+                                for (Album album : albums) {
+                                    album.setArtist(x);
+                                }
                                 if (albums!=null) {
                                     albumList.addAll(albums);
                                 }

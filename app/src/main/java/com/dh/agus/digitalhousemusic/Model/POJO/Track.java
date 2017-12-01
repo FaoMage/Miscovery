@@ -77,6 +77,19 @@ public class Track implements Parcelable {
     @Expose
     private String type;
 
+    private Boolean isFavorite = false;
+
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.isFavorite = favorite;
+    }
+
+    public Track() {
+    }
+
     protected Track(Parcel in) {
         id = in.readString();
         title = in.readString();
@@ -91,11 +104,14 @@ public class Track implements Parcelable {
         preview = in.readString();
         availableCountries = in.createStringArrayList();
         album = in.readParcelable(Album.class.getClassLoader());
+        artist = in.readParcelable(Artist.class.getClassLoader());
         type = in.readString();
     }
 
-    public Track(String title, Artist artist) {
+    public Track(String title, String id, Album album, Artist artist) {
         this.title = title;
+        this.album = album;
+        this.id = id;
         this.artist = artist;
     }
 
@@ -310,6 +326,7 @@ public class Track implements Parcelable {
         parcel.writeString(preview);
         parcel.writeStringList(availableCountries);
         parcel.writeParcelable(album, i);
+        parcel.writeParcelable(artist, i);
         parcel.writeString(type);
     }
 }

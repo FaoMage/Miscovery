@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/black"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity">
 
     <include layout="@layout/toolbar"/>
@@ -31,6 +31,7 @@
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
+                android:id="@+id/linealLayout_song"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

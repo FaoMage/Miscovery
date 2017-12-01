@@ -2,14 +2,11 @@ package com.dh.agus.digitalhousemusic.Model.DAO;
 
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.Albums;
-import com.dh.agus.digitalhousemusic.Model.POJO.Artist;
 import com.dh.agus.digitalhousemusic.Model.POJO.Artists;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genre;
 import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

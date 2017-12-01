@@ -45,8 +45,12 @@ public class Artist implements Parcelable{
     @Expose
     private String type;
 
-    public Artist(String name) {
+    public Artist() {
+    }
+
+    public Artist(String id, String name) {
         this.name = name;
+        this.id = id;
     }
 
     protected Artist(Parcel in) {
