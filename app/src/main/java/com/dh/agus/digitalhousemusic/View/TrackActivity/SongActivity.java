@@ -34,6 +34,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class SongActivity extends AppActivity {
     public static final String SONG_POSITION = "SONG_POSITION";
     public static final String SONG_ALBUM = "SONG_ALBUM";
+    private Track actualTrack;
     private ViewPager viewPager;
     private MediaPlayer mMediaPlayer;
     private ImageView mPlayerControl;
@@ -115,6 +116,7 @@ public class SongActivity extends AppActivity {
                     DataTracksList dataTracksList = album.getTracks();
                     List<Track> list = dataTracksList.getData();
                     Track track = list.get(i);
+                    actualTrack = track;
 
                     TextView textViewSongName = (TextView) findViewById(R.id.textViewSongName);
                     textViewSongName.setText(track.getTitle());
@@ -229,6 +231,31 @@ public class SongActivity extends AppActivity {
             mPlayerControl.setImageResource(R.drawable.ic_pause);
             playCycle();
         }
+    }
+
+    // create an action bar button
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_track_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.item_menuTrackActivity_share) {
+            shareSong();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void shareSong() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Hey! Tengo una canción para tí: " + actualTrack.getTitle() + "("
+                + actualTrack.getArtist().getName() + ") - " + actualTrack.getLink();
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Compartir via"));
     }
 
     private int getItem(int i) {
