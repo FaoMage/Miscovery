@@ -14,6 +14,12 @@ public interface serviceDeezer {
     @GET("album/{id}")
     Call<Album> getAlbum(@Path("id") String id);
 
+    @GET("genre")
+    Call<Genres> getGenres();
+
+    @GET("genre/{id}")
+    Call<Genre> getGenre(@Path("id") String id);
+
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://api.deezer.com/")
             .addConverterFactory(GsonConverterFactory.create())

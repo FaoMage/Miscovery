@@ -8,17 +8,11 @@
     android:background="@color/colorPrimaryDark"
     android:focusableInTouchMode="true">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/searchView"
-        android:theme="@style/SearchStyle"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_margin="40dp"
-        android:background="@drawable/search_model"
-        app:queryHint="buscar musica"
-        app:iconifiedByDefault="false">
-    </android.support.v7.widget.SearchView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -31,16 +25,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recientemente escuchado"
+        android:text="Albumes"
         android:textSize="16sp"
         android:textColor="@color/colorLightGrey"
         android:layout_margin="15dp"
         android:layout_gravity="center"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="20dp" />
+
 </LinearLayout>
