@@ -22,10 +22,10 @@ public interface serviceDeezer {
     @GET("genre/{id}")
     Call<Genre> getGenre(@Path("id") String id);
 
-    @GET("genre/{id}/artists")
+    @GET("genre/{id}/artists/?limit=20")
     Call<Artists> getGenreArtists(@Path("id") String id);
 
-    @GET("artist/{id}/albums")
+    @GET("artist/{id}/albums/?limit=2")
     Call<Albums> getArtistsAlbums(@Path("id") String id);
 
     @GET("album/{id}/tracks/?limit=10")

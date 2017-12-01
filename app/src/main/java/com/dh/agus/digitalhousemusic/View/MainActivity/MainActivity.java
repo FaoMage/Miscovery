@@ -119,6 +119,8 @@ public class MainActivity extends AppActivity
     @Override
     protected void onStart() {
         super.onStart();
+        setTitle("Miscovery");
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 

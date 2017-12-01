@@ -135,8 +135,6 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void finish(Albums result) {
                                 List<Album> albums = result.getData();
-                                Log.d("fdsfs", "finish: albums<<<");
-
                                 if (albums!=null) {
                                     albumList.addAll(albums);
                                 }

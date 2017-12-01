@@ -34,7 +34,7 @@ public class GenresRecyclerAdapter extends RecyclerView.Adapter<GenresRecyclerAd
         GenresRecyclerAdapter.MyItemHolder viewHolder;
         View v;
         v = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.list_item, parent, false);
+                R.layout.list_genre_item, parent, false);
         viewHolder = new MyItemHolder(v);
 
         return viewHolder;
