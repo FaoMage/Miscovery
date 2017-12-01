@@ -14,6 +14,7 @@ import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
 import com.dh.agus.digitalhousemusic.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder> {
@@ -27,10 +28,20 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
     public SongListRecyclerViewAdapter(Context context, Album album, RecyclerViewInterface listener, String listType) {
         this.context = context;
         this.album = album;
-        DataTracksList dataTracksList = album.getTracks();
-        songsList = dataTracksList.getData();
+        if (listType.equals(SongListFragment.TYPE_COMMON)) {
+            songsList = new ArrayList<>();
+        } else {
+            DataTracksList dataTracksList = album.getTracks();
+            songsList = dataTracksList.getData();
+        }
         this.listener = listener;
         this.listType = listType;
+    }
+
+    public void updateAlbum (Album album) {
+        this.album = album;
+        DataTracksList dataTracksList = album.getTracks();
+        this.songsList = dataTracksList.getData();
     }
 
     @Override

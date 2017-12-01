@@ -74,11 +74,12 @@ public class HomeFragment extends Fragment {
         getGenres();
 
 
+        // lo que hay q sacar
         AlbumsRecyclerAdapter.RecyclerViewInterface albumListener =
                 new AlbumsRecyclerAdapter.RecyclerViewInterface() {
                     @Override
                     public void albumOnClick(Integer albumPosition, final Album album) {
-                        controller.getTrackList(album.getId().toString(), new ResultListener<DataTracksList>() {
+                        /*controller.getTrackList(album.getId().toString(), new ResultListener<DataTracksList>() {
                             @Override
                             public void finish(DataTracksList result) {
                                 album.setDataTracksList(result);
@@ -89,7 +90,12 @@ public class HomeFragment extends Fragment {
                                 m.changeFragment(songListFragment, MainActivity.NOT_HOME, album.getTitle());
 
                             }
-                        });
+                        });*/
+
+                        MainActivity m = (MainActivity) getContext();
+                        SongListFragment songListFragment =
+                                SongListFragment.SongListFragmentFactory(album, SongListFragment.TYPE_COMMON);
+                        m.changeFragment(songListFragment, MainActivity.NOT_HOME, album.getTitle());
                     }
                 };
 
@@ -135,9 +141,8 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void finish(Albums result) {
                                 List<Album> albums = result.getData();
-                                for (Album album : albums) {
-                                    album.setArtist(x);
-                                }
+                                //todo se rompe aca, no se por que
+
                                 if (albums!=null) {
                                     albumList.addAll(albums);
                                 }
