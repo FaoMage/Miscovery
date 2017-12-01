@@ -88,7 +88,6 @@ public class Controller {
         daoDeezer.getDataTracksList(albumId, new Callback<DataTracksList>() {
             @Override
             public void onResponse(Call<DataTracksList> call, Response<DataTracksList> response) {
-                Log.d("albumID", "onResponse: " + albumId);
                 viewListener.finish(response.body());
             }
 
