@@ -32,7 +32,6 @@ public class FavoritesFragment extends Fragment {
     private ProgressBar progressBar;
     private FragmentManager fragmentManager;
     private TextView textViewNone;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +42,6 @@ public class FavoritesFragment extends Fragment {
         fragmentManager = getChildFragmentManager();
         progressBar = view.findViewById(R.id.progessBar_favorites);
         textViewNone = view.findViewById(R.id.textView_favorites_none);
-        swipeRefreshLayout = view.findViewById(R.id.swipe);
 
         return view;
     }
@@ -55,19 +53,8 @@ public class FavoritesFragment extends Fragment {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             // user logueado
             setFavoriteList();
-            swipeRefreshLayout.setEnabled(true);
-            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                        setFavoriteList();
-                    }
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
         } else {
             // user no logueado
-            swipeRefreshLayout.setEnabled(false);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             FavoritesNoLogFragment favoritesNoLogFragment = new FavoritesNoLogFragment();
             fragmentTransaction.replace(R.id.frame_favorites,favoritesNoLogFragment);

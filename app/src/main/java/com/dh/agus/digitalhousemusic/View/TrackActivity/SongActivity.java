@@ -1,8 +1,11 @@
 package com.dh.agus.digitalhousemusic.View.TrackActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -160,7 +163,15 @@ public class SongActivity extends AppActivity {
             mPlayerControl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    togglePlayPause();
+                    ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                    if (isConnected) {
+                        togglePlayPause();
+                    } else {
+                        String message = "Debes estar conectado a internet para reproducir la cancion";
+                        Toast.makeText(SongActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

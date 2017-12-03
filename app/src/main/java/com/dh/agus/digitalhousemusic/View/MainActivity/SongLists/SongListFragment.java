@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.dh.agus.digitalhousemusic.Controller.Controller;
+import com.dh.agus.digitalhousemusic.Model.DAO.ResultListener;
 import com.dh.agus.digitalhousemusic.Model.POJO.Album;
 import com.dh.agus.digitalhousemusic.Model.POJO.DataTracksList;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
@@ -50,20 +53,45 @@ public class SongListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Se infla la view
+        final View view = inflater.inflate(R.layout.fragment_song_list, container, false);
+
         // Se extrae del bundle el album
         Bundle bundle = getArguments();
-        Album album = bundle.getParcelable(KEY_ALBUM);
-        String listType = bundle.getString(KEY_LIST_TYPE);
-
-        // Se infla la view
-        View view = inflater.inflate(R.layout.fragment_song_list, container, false);
+        final Album album = bundle.getParcelable(KEY_ALBUM);
+        final String listType = bundle.getString(KEY_LIST_TYPE);
 
         // Se crea el RecyclerView.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_songListFragment);
 
         // SongListRecyclerViewAdapter | getActivity pasa la información directamente a la actividad
-        SongListRecyclerViewAdapter songListRecyclerViewAdapter = new SongListRecyclerViewAdapter(getContext(),
+        final SongListRecyclerViewAdapter songListRecyclerViewAdapter = new SongListRecyclerViewAdapter(getContext(),
                 album, (SongListRecyclerViewAdapter.RecyclerViewInterface) getActivity(), listType);
+
+        if (listType.equals(TYPE_COMMON)) {
+            Controller controller = new Controller();
+            final ProgressBar progressBar = view.findViewById(R.id.progressBar_songList);
+            progressBar.setVisibility(View.VISIBLE);
+            controller.getAlbum(album.getId(), new ResultListener<Album>() {
+                @Override
+                public void finish(Album result) {
+                    progressBar.setVisibility(View.GONE);
+                    songListRecyclerViewAdapter.updateAlbum(result);
+                    songListRecyclerViewAdapter.notifyDataSetChanged();
+
+                    //Se agrega un background difuminado
+                    if (!listType.equals(TYPE_FAVORITE) && !listType.equals(TYPE_PLAYLIST)) {
+                        ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
+                        RequestOptions requestOptions = new RequestOptions()
+                                .bitmapTransform(new BlurTransformation(15))
+                                .placeholder(R.drawable.placeholder);
+                        Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
+                    }
+                }
+            });
+        } else if (listType.equals(TYPE_FAVORITE)) {
+            recyclerView.setBackgroundResource(R.color.colorTransparent);
+        }
 
         // Se crea el layoutManager
         RecyclerView.LayoutManager layoutManager =
@@ -73,14 +101,6 @@ public class SongListFragment extends Fragment {
         recyclerView.setAdapter(songListRecyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        //Se agrega un background difuminado
-        if (!listType.equals(TYPE_FAVORITE) && !listType.equals(TYPE_PLAYLIST)) {
-            ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
-            RequestOptions requestOptions = new RequestOptions()
-                    .bitmapTransform(new BlurTransformation(15))
-                    .placeholder(R.drawable.placeholder);
-            Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
-        }
         return view;
     }
 }

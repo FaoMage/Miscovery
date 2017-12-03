@@ -17,8 +17,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
