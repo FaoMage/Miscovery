@@ -108,7 +108,7 @@ public class LoginActivity extends AppActivity {
             @Override
             public void onError(FacebookException exception) {
                 Toast.makeText(LoginActivity.this,
-                        R.string.login_error,
+                        R.string.login_error_facebook,
                         Toast.LENGTH_SHORT).show();
                 Log.d("------",exception.toString());
             }

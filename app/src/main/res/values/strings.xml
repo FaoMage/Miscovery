@@ -33,6 +33,7 @@
     <string name="login_incomplete_field">Este campo no puede estar vacio</string>
     <string name="login_nointernet_message">Por favor, corrobora tu conexión a internet.</string>
     <string name="login_nointernet_title">No hay internet :(</string>
+    <string name="login_error_facebook">Se produjo un error con Facebook, intente mas tarde.</string>
 
     <string name="register_signup">registrarse</string>
     <string name="register_invalid_email">Ingrese un email valido</string>

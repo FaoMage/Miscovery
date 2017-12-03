@@ -65,12 +65,10 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
             @Override
             public void onClick(View view) {
                 listener.favoriteOnClick(view, track, album);
-            }
-        });
-        holder.imageViewMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.menuOnClick(view);
+                if (listType.equals(SongListFragment.TYPE_FAVORITE)) {
+                    songsList.remove(position);
+                    notifyDataSetChanged();
+                }
             }
         });
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +90,6 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
         private TextView textViewArtistName;
         private LinearLayout linearLayout;
         private ImageView imageViewFavorite;
-        private ImageView imageViewMenu;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -100,7 +97,6 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
             this.textViewArtistName = itemView.findViewById(R.id.textView_ArtistName);
             this.linearLayout = itemView.findViewById(R.id.linearLayoutSongTitles);
             this.imageViewFavorite = itemView.findViewById(R.id.imageViewFavorite);
-            this.imageViewMenu = itemView.findViewById(R.id.imageViewMenu);
         }
 
         public void loadView (Track track, Album album) {
@@ -118,7 +114,6 @@ public class SongListRecyclerViewAdapter extends RecyclerView.Adapter<SongListRe
 
     public interface RecyclerViewInterface {
         void favoriteOnClick (View view, Track track, Album album);
-        void menuOnClick (View view);
         void songOnClick(Integer songPosition, Album album);
     }
 }

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <include layout="@layout/toolbar"/>
+    android:orientation="vertical">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_mainActivity"
@@ -18,25 +15,33 @@
         tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <RelativeLayout
-            android:id="@+id/activity_main"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/frame_mainActivity"
+            <include layout="@layout/toolbar"/>
+
+            <RelativeLayout
+                android:id="@+id/activity_main"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/bottom_navigation"
-                android:animateLayoutChanges="true"
-                android:background="@color/colorPrimaryDark"/>
+                tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
-            <include layout="@layout/bottom_navigation"/>
-        </RelativeLayout>
+                <FrameLayout
+                    android:id="@+id/frame_mainActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/bottom_navigation"
+                    android:animateLayoutChanges="true"
+                    android:background="@color/colorPrimaryDark"/>
+
+                <include layout="@layout/bottom_navigation"/>
+            </RelativeLayout>
+        </LinearLayout>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/navigationView_mainActivity"
@@ -49,4 +54,4 @@
             android:background="@color/colorPrimaryDark"
             app:itemTextColor="@android:color/white" />
     </android.support.v4.widget.DrawerLayout>
-</LinearLayout>
+</FrameLayout>

@@ -2,21 +2,29 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/colorDarkBackground">
+    android:layout_height="50dp">
+
+    <ImageView
+        android:id="@+id/imageViewFavorite"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_favorite_border_accent_24dp"
+        android:padding="15dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"/>
 
     <LinearLayout
         android:id="@+id/linearLayoutSongTitles"
-        android:layout_width="260dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_centerHorizontal="true">
+        android:layout_toRightOf="@id/imageViewFavorite">
 
         <TextView
             android:id="@+id/textView_SongName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:text="@string/test"
             android:textSize="18sp"
             android:gravity="center_vertical"
@@ -34,27 +42,5 @@
 
             android:textColor="@color/colorLightGrey"/>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageViewFavorite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_favorite_border_accent_24dp"
-        android:padding="15dp"
-        android:layout_toLeftOf="@id/linearLayoutSongTitles"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"/>
-
-    <ImageView
-        android:id="@+id/imageViewMenu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_more_vert_black_24dp"
-        android:padding="15dp"
-        android:layout_toRightOf="@id/linearLayoutSongTitles"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-
-        android:tint="@color/colorLightGrey"/>
 
 </RelativeLayout>

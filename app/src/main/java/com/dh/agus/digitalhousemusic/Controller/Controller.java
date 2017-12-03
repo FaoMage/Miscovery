@@ -13,12 +13,16 @@ import com.dh.agus.digitalhousemusic.Model.POJO.Genres;
 
 import java.util.List;
 import com.dh.agus.digitalhousemusic.Model.POJO.Track;
+import com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.Queue;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+
+import static com.dh.agus.digitalhousemusic.Model.POJO.serviceDeezer.retrofit;
 
 /**
  * Created by zetaxmage on 26/09/17.
@@ -206,6 +210,5 @@ public class Controller {
             }
         });
     }
-
 
 }

@@ -89,6 +89,8 @@ public class SongListFragment extends Fragment {
                     }
                 }
             });
+        } else if (listType.equals(TYPE_FAVORITE)) {
+            recyclerView.setBackgroundResource(R.color.colorTransparent);
         }
 
         // Se crea el layoutManager
@@ -99,14 +101,6 @@ public class SongListFragment extends Fragment {
         recyclerView.setAdapter(songListRecyclerViewAdapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        /*//Se agrega un background difuminado
-        if (!listType.equals(TYPE_FAVORITE) && !listType.equals(TYPE_PLAYLIST)) {
-            ImageView imageViewSongListBackground = view.findViewById(R.id.imageViewSongListBackground);
-            RequestOptions requestOptions = new RequestOptions()
-                    .bitmapTransform(new BlurTransformation(15))
-                    .placeholder(R.drawable.placeholder);
-            Glide.with(getContext()).load(album.getCoverMedium()).apply(requestOptions).into(imageViewSongListBackground);
-        }*/
         return view;
     }
 }

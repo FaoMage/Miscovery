@@ -27,7 +27,6 @@ public class AlbumsRecyclerAdapter extends RecyclerView.Adapter<AlbumsRecyclerAd
         this.listener = listener;
     }
 
-
     @Override
     public MyItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         AlbumsRecyclerAdapter.MyItemHolder viewHolder;

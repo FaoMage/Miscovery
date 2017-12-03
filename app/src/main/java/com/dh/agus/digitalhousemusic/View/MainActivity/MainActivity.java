@@ -115,7 +115,6 @@ public class MainActivity extends AppActivity
     @Override
     protected void onStart() {
         super.onStart();
-        setTitle("Miscovery");
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -222,11 +221,6 @@ public class MainActivity extends AppActivity
     }
 
     @Override
-    public void menuOnClick(View view) {
-        Toast.makeText(this, "Funcion: Abrir menu de cancion", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void songOnClick(Integer songPosition, Album album) {
         Intent intent = new Intent(this, SongActivity.class);
         Bundle bundle = new Bundle();
@@ -235,5 +229,27 @@ public class MainActivity extends AppActivity
 
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        refreshFragment();
+    }
+
+    public void refreshFragment () {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_mainActivity);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.detach(currentFragment);
+        fragmentTransaction.attach(currentFragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        setTitle("Miscovery");
     }
 }
