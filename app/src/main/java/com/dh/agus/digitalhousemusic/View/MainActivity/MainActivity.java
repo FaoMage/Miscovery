@@ -100,9 +100,9 @@ public class MainActivity extends AppActivity
                         changeFragment(favoritesFragment, NOT_HOME, "Favoritos");
                         break;
 
-                    case R.id.menu_playlist:
+                    /*case R.id.menu_playlist:
                         changeFragment(playlistFragment, NOT_HOME, "Playlist");
-                        break;
+                        break;*/
                 }
 
                 return false;
