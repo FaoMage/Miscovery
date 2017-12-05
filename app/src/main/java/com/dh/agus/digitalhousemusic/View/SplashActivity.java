@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dh.agus.digitalhousemusic.View.MainActivity.MainActivity;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by ZetaxMage on 26/10/2017.

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context="com.dh.agus.digitalhousemusic.View.MainActivity.NoInternetActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modo Offline +"
+        android:textColor="@color/colorAccent"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Este modo te permitira seguir viviendo la experiencia Miscovery al maximo mientras no tengas internet"
+        android:textColor="@color/colorLightGrey"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="Que puedo hacer:"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="45dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorLightGrey"
+        android:text="- Ver los ultimos 10 albums que visitaste. \n- Ver tu lista completa de favoritos. \n- Entrar al detalle de todas las canciones. \n- Guardar o borrar favoritos."
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@drawable/login_button_model"
+        android:layout_gravity="center"
+        android:text="entendido"
+        android:layout_marginTop="50dp"
+        android:onClick="goBack"/>
+
+</LinearLayout>
